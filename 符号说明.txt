@@ -1,0 +1,25 @@
+逆元：\inv{g}
+正规于：\zg
+正规包含：\zgbh
+推出：\implies
+被推出：\impliedby
+等价于： \iff
+子集于：\subset
+包含：\supset
+打到（把a打到b）\mapsto
+整除：\bigm|
+不等于： \ne或者\neq
+上划线：\ovl
+等价：\sim
+波浪线：\blx
+映射复合：\circ
+同构：\cong
+并集：\cup
+交集：\cap
+青蓝色注释\noteb
+长方形边框表示位置：\posi
+正负号：\pm
+负正号：\mp
+空集：\varnothing
+群作用于：\action
+同余：\equiv

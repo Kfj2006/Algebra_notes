@@ -1,0 +1,269 @@
+\chapter*{Lecture06环的本质：从Abel群到新运算}
+\addcontentsline{toc}{chapter}{Lecture06环的本质：从Abel群到新运算}
+\stepcounter{chapter}
+
+\section{环的基本概念}
+\kfj{定义：}设R是一个非空集合，R上有两种运算$+\colon R\times R\to R$和$\cdot \colon R\times R\to R$。若满足：
+\[
+\left\{
+\begin{aligned}
+&(1)\text{R关于“+”运算}(R,+)\text{构成一个Abel群}\\
+&(2)\text{R关于“$\cdot$”运算}(R,\cdot)\text{构成一个半群}\\
+&(3)\text{满足左分配律}：\forall a,b,c\in R,\; a\cdot(b+c)=a\cdot b+a\cdot c\\
+&(4)\text{满足右分配律}：\forall a,b,c\in R,\;(b+c)\cdot a=b\cdot a+c\cdot a
+\end{aligned}\right.
+\]
+则称$(R,+,\cdot)$是一个环（Ring）\\
+\kfj{定义：}对于$(R,+,\cdot)$是一个环：\\
+\indent (1)若$\forall a,b\in R,\; a\cdot b=b\cdot a$，则称R是交换环\\
+\indent (2)若R关于“$\cdot$”运算构成一个幺半群，则称R是一个含幺环\\
+\kfj{称呼：}在环$(R,+,\cdot)$中，常记Abel群$(R,+)$的单位元为0，称为环R的零元；在此运算下a的逆元记为-a。特别地，若R是一个含幺环，则常记幺半群$(R,\cdot)$的单位元为1，称为环的幺元。\\
+\kfj{定理：}设R是一个环，则有以下运算公式：
+\[
+\left\{
+\begin{aligned}
+&(1):\forall a\in R,\; 0\cdot a=a\cdot 0\\
+&(2):\forall a,b\in R,\; (-a)\cdot b=a\cdot (-b)=-(a\cdot b)\\
+&(3):\forall a,b\in R,\; (-a)\cdot (-b)=a\cdot b\\
+&(4):\forall \{a_i\}_{i=1}^{n},\{b_i\}_{i=1}^{n}\subset R,\; (\sum_{i=1}^{n}a_i)\cdot (\sum_{j=1}^{n}b_j)=\sum_{i=1}^{n}\sum_{j=1}^{n}a_i\cdot b_j
+\end{aligned}\right.
+\]
+证明略，易证\\
+\kfj{定义：}设R是一个环，若存在a和b属于R，且满足$a\neq 0,b\neq 0$，但是$a\cdot b=0$，则称a是b的左零因子，自然地称b是a右的零因子，左右零因子统称为零因子。\\
+\kfj{定义：}对于R是一个环，若R中没有零因子，则称R是整的(integral)。更进一步，如果R即是整的，也是含幺环，还是是交换环，则称R是一个整区(integral domain)。\\
+\kfj{性质：}若环R是整的，则满足：\\
+\indent (1):对于$a,b\in R$，若$a\cdot b=0$，则$a=0$或$b=0$。\\
+\indent (2):R满足消去律。即对于$a\neq 0$，若有等式：$ab=ac$，那么可得$b=c$；若有等式：$xa=ya$，那么可得$x=y$。
+\begin{proof}
+(1)：如果a和b都不是0，那么此时a和b中必有零因子，因此与整性质矛盾。\\
+(2)：（若$ab=ac$)：则有$ab-ac=0\iff a\cdot (b-c)=0$。由于$a\neq 0$，因此由性质(1)可知，$b-c=0$，即$b=c$\\
+(若$xa=ya$)：同理可知：$xa-ya=0\iff (x-y)\cdot a=0\implies x-y=0\iff x=y$。
+\end{proof}
+\kfj{定义：}设R是一个含幺环，0是R的零元。记$R^*=R-\{0\}$，再记1是R的幺元，那么对于R中元素r，若存在$s\in R$，使得$r\cdot s=s\cdot r=1$，则称s是r的逆元，称r为可逆元，也成为“单位”(unit)\\
+\kfj{定义：}若对于含幺环R而言，$R^*$中所有元素都是可逆元，则称R是一个除环（有时也称为体）。特别地，交换除环称为一个域\\
+\kfj{命题：}若环R是域，则$R^*$再其乘法下也构成Abel群。\\
+易证，证明略。\\
+\indent 类似于群，下面我们来定义环的子对象。\\
+\kfj{定义 ：}设R是一个环，对于R的子集$R_1$，若$R_1$在R的加法和乘法运算下也构成一个环，则称$R_1$是R的一个子环，记作$R_1<R$。\\
+\indent 事实上，这样一个子对象仅仅对两个运算中的一个成群，因此这个子对象不会比群论中多出什么新奇的结论。
+
+\section{理想与商环}
+\indent 在群众我们已经见到了在群的商集上定义运算可以让我们把群压缩称更小的群进行考察，或者压缩成一个与另一个群长得很像的群。我们希望在环论中也有类似的结论。\\
+\indent 我们对于环R和他的某一个子环$I$,若只考虑加法运算，我们由R作为加法群可知$I\zg R$，因而有商群$R/I$。对于$\ovl{x},\; \ovl{y}\in R/I$，我们自然地定义乘法：
+\[
+\cdot \colon R/I\times R/I\to R/I ,\; (\ovl{x},\ovl{x})\mapsto \ovl{x\cdot y}
+\]
+这个运算良定义吗？我们仍从一个定理出发。\\
+\kfj{定理：}设R是一个环，$I$是R的子环，那么：
+\[
+R/I\text{中上述运算良定义}\iff \forall r\in R,\; \forall a\in I,\; ra\in I\text{且}ar\in I
+\]
+\begin{proof}
+($\implies$)：由于上述运算良定义，则$\forall r,x\in R,\; a\in I$，由于$(x+a)-x=a\in I$，所以$(x+a)$和x属于同一个等价类。由于上述乘法良定义，且显然r和自己在同一个等价类里，因此有$r\cdot x$和$r\cdot (x+a)$在同一个等价类里。故有：
+\[
+r\cdot (x+a)-r\cdot x\in I\iff (r\cdot x+r\cdot a)-r\cdot x\in I\iff ra\in I
+\]
+同理$xr$和$(x+a)r$属于同一个等价类，于是也有：
+\[
+(x+a)r-xr\in I\iff (xr+ar)=xr+ar-xr\in I\iff ar\in I
+\]
+由此可推出：$\forall r\in R,\; \forall a\in I,\; ra\in I\text{且}ar\in I$\\
+($\impliedby$):我们下面证明两对互相等价的元素相乘，结果仍互相等价。设$x_1,x_2,y_1,y_2\in R$，满足$x_1-x_2\in I,\; y_1-y_2\in I$，则有：
+\[
+x_1y_1-x_2y_2=x_1y_1-x_2y_1+x_2y_1-x_2y_2=(x_1-x_2)y_1+x_2(y_1-y_2)
+\]
+由于$x_1-x_2\in I,\; y_1-y_2\in I$，故$(x_1-x_2)y_1\in I,\; x_2(y_1-y_2)\in I$。再由$I$是加法子群和$x_1y_1-x_2y_2=(x_1-x_2)y_1+x_2(y_1-y_2)\in I$，因此$x_1y_1$，和$x_2y_2$属于同一个等价类，因此上述运算良定义。
+\end{proof}
+我们发现，一般而言子环是不满足上述的性质的，因此我们期望一个理想的子环可以满足上述条件使得商环上的运算良定义。\\
+\kfj{定义：}对于环R的子环$I$，若$I$满足：
+\[
+\forall r\in R,\; \forall a\in I,\; ra\in I\text{且}ar\in I
+\]
+则称$I$是R的一个理想（Ideal），记为：$I\zg R$。\\
+\indent 我们不难看出，环中的理想与群中的正规子群起到相同的作用，因而我们沿用之前的记号。但是值得注意的是，二者有着本质的区别是因为理想有两个运算。\\
+\kfj{推论：}设R是环，$I\zg R$，则R的加法商群$R/I$在运算：
+\[
+\cdot \colon R/I\times R/I\to R/I ,\; (\ovl{x},\ovl{x})\mapsto \ovl{x\cdot y}
+\]
+下构成一个环。\\
+\kfj{定义：}对于环R及其理想$I$，$R/I$称为环R商去理想$I$所得商环。\\
+\indent 事实上，我们今后研究理想这个对象比子环更多，因此我们结合以下子环的判别方法，可得如下定理。\\
+\kfj{定理：}(理想判别法)设R是一个环，$I$是R的非空子集，则：
+\[
+I\zg R\iff \left\{
+\begin{aligned}
+&(1):\forall a,b\in I,\; a-b\in I\\
+&(2):\forall r\in R ,\; a\in I,\; ar\in I,\; ra\in I
+\end{aligned}\right.
+\]
+\begin{proof}
+($\implies$)显然\\
+($\impliedby$)此时已经满足（2），那么只需证明$I$是R的子环。我们由子群判别定理可从（1）立即得出$I$是R的加法子群。而又有：
+\[
+\forall r\in I\subset R ,\; a\in I,\; ar\in I,\; ra\in I
+\]
+因此运算“$\cdot|_{I\times I}$是一个良定义的，$I$上的运算。再由R本身有结合律可知$I$是R的子环，因而$I$是R的理想。
+\end{proof}
+\kfj{推论：}设$\{A_i|i\in I\}$是以$I$作为角标集的一族理想（注意$I$此时不是理想而是角标集），则有：
+\[
+\bigcap_{i\in I}A_i\zg R
+\]
+\begin{proof}
+\[
+\forall a,b\in \bigcap_{i\in I}A_i,\; \forall i\in I,\; a,b\in A_i
+\]
+因此可知：$a-b\in A_i$，故有：
+\[
+\forall a,b\in \bigcap_{i\in I}A_i,\; a-b\in \bigcap_{i\in I}A_i
+\]
+同理，
+\[
+\forall r\in R,\; a\in \bigcap_{i\in I}A_i,\; \forall i\in I,\; ra\in A_i,\; ar\in A_i\implies ra\in \bigcap_{i\in I}A_i,\; ar\in \bigcap_{i\in I}A_i
+\]
+于是由理想判别法立即得出结论。
+\end{proof}
+\kfj{定义：}设R是环，$S$是R的子集，则称R中所有包含集合S的理想的交为集合S生成的理想，记作$<S>$。特别地，由单个元素$a$生成的理想记为$<a>$。\\
+\kfj{定理：}设R是环，$a\in R$，则该元素生成的理想为：
+\[
+A=\{ra+as+na+\sum_{i=1}^{n}a_ias_i|r,r_i,s,s_i\in R,\; n\in \mathbb{Z},\; m\in \mathbb{N}^*\}
+\]
+须特别声明的是，$na$记为n个$a$相加，其中n与a并没有做环中的乘法运算。\\
+\begin{proof}
+不难验证，A是一个理想，并且$a\in A$，因此由生成理想的最小性可知，$<a>\subset A$。由推论可知，$<a>$本身也是一个理想，因此$\forall r,r_i,s,s_i\in R,\; n\in \mathbb{Z}$，有：
+\[
+ra\in <a>,\; as\in <a>,\; na\in <a>,\; r_ias_i\in <a>
+\]
+再由子环的性质：
+\[
+ra+as+na+\sum_{i=1}^{n}a_ias_i\in <a>\implies A\subset <a>
+\]
+于是我们得到$A=<a>$
+\end{proof}
+\noteb{(注：证明A是理想的时候会用到这样的等式：$\forall p\in R,\; p\cdot(na)=(np)\cdot a;(na)\cdot p=a\cdot(np)$)}\\
+\kfj{推论：}\\
+\indent (1):若R是含幺环，则：
+\[
+<a>=\{\sum_{i=1}^mr_ias_i|r_i,s_i\in R,\; m\in \mathbb{N}^*\}
+\]
+\indent (2):若R是交换环，则：
+\[
+<a>=\{ra+na|r\in R,\; n\in \mathbb{Z}\}
+\]
+\indent (3):若R是含幺交换环，则$<a>=\{ra|r\in R\}$，我们记之为$Ra$。当然，我们也可以类似地定义$aR=\{ar|r\in R\}$，只不过此时由于R是含幺交换环，所以有$Ra=aR=<a>$。\\
+\kfj{定义：}鉴于单元素生成的理想有如此好的性质，我们称单个元素生成的理想为主理想(Principal Ideal)\\
+\kfj{例：}在含幺交换环R中，设子集$X=\{x_1,\cdots,x_n\}$，则有：
+\[
+<X>=\{\sum_{k=1}^nr_kx_k|\forall k,\; r_k\in R\}
+\]
+这个命题的证明与证明单个元素生成的理想所具有的形式类似，我们可以看出，等式右侧集合中的所有元素都是包含X的理想所必须包含的元素；但是又不难看出右侧集合已经构成了R的一个理想。因此我们由生成理想的最小性可知左式就是X的生成理想。\\
+ 
+\section{环同态及同态定理}
+\kfj{定义：}设$R_1$，$R_2$是两个环，若映射$f\colon R_1\to R_2$，满足：
+\[
+\left\{
+\begin{aligned}
+&(1)\text{保加法：}\forall a,b\in R_1,\; f(a+b)=f(a)+f(b)\\
+&(2)\text{保乘法：}\forall a,b\in R_1,\; f(ab)=f(a)f(b)
+\end{aligned}\right.
+\]
+则称$f\colon R_1\to R_2$是从$R_1$到$R_2$的环同态。类似于群同态，若$f$是单射，则称$f$是单同态；若$f$是满射，则称$f$是满同态。特别地若$f$是双射，则称$f$是环同构，记作$R_1\cong R_2$。\\
+\kfj{定义：}对于环同态$f\colon R_1\to R_2$，我们类似于群，定义像集和核集。：
+\[
+\left\{
+\begin{aligned}
+&Imf=\{f(r)|r\in R_1\}\\
+&Kerf=\{r\in R_1|f(r)=\theta_2\}\text{其中}\theta_2\text{是}R_2\text{的零元}
+\end{aligned}\right.
+\]
+\kfj{性质：}设$f\colon R_1\to R_2$是环同态，则：\\
+\indent (1):若$\theta_1$是$R_1$的零元，则$f(\theta_1)$是$R_2$的零元。\\
+\indent (2):若$R_1$是含幺环，其中$1_{R_1}$是$R_1$的幺元，则$R_2$也是含幺环，且$f(1_{R_1})$是$R_2$的幺元。\\
+\indent (3)$\forall r\in R_1,\; f(-r)=-f(r)$\\
+\indent (4)$Imf<R_2$\\
+\indent (5)$Kerf\zg R_1$\\
+\begin{proof}
+其中(1)(2)(3)(4)都可以由群与半群的结论轻易得到，我们下面来简单证明一下(5)。\\
+\indent 由于环同态保加法，因此由群论的结论可知$Kerf$是$R_1$的加法子群，故有：
+\[
+\forall a,b\in Kerf,\; a-b\in Kerf
+\]
+此时设$\theta_2$是$R_2$的零元，于是有：
+\[
+\forall r\in R_1,\; \forall x\in Kerf,\; f(ra)=f(r)f(a)=f(r)\theta_2=\theta_2
+\]
+这是由环的运算公式得到的；同理有：
+\[
+\forall r\in R_1,\; \forall x\in Kerf,\; f(ar)=f(a)f(r)=\theta_2f(r)=\theta_2
+\]
+于是我们由理想判别法立刻可知$Kerf\zg R_1$。
+\end{proof}
+与群论相似，我们也可以有同态定理：\\
+\kfj{环同态基本定理：}设$R_1$和$R_2$是环，$f\colon R_1\to R_2$是环同态，则诱导出同构：
+\[
+\ovl{f}\colon R_1/Kerf\to Imf,\; \ovl{r}\mapsto f(r)
+\]
+\begin{proof}
+可知$R_1$和$R_2$是Abel群，且$f\colon R_1\to R_2$也是群同态。于是由群同态基本定理有：
+\[
+\ovl{f}\colon R_1/Kerf\cong Imf,\; \ovl{r}\mapsto f(r)
+\]
+由于$Kerf\zg R_1$，因此可知加法商群$R_1/Kerf$构成一个环。由于$f$是环同态，因此$Imf<R_2$是$R_2$的子环，特别地构成一个环。因此我们只需证明群同态所诱导的群同构也是一个环同态就可以证明这个命题。\\
+\noteb{(注：这个$\ovl{f}$是良好定义的因为作为映射而言，群同态基本定理已经告诉我们它是一个良定义的映射)}\\
+$\forall \ovl{a},\ovl{b}\in R_1/Kerf$，有：
+\[
+\ovl{f}(\ovl{a}\cdot \ovl{b})=\ovl{f}(\ovl{ab})=f(ab)=f(a)f(b)=\ovl{f}(\ovl{a})\cdot \ovl{f}(\ovl{b})
+\]
+\indent 其中，第一个等号使用商环的定义、第二个和第四个等号使用群同态诱导同构的定义、第三个等号使用f是环同态的性质。\\
+\end{proof}
+\kfj{满同态对应定理：}设$R_1$和$R_2$是环，$f\colon R_1\to R_2$是环同态。我们给出如下记号：
+\[
+\mathbb{J}=\{J\zg R_1|Kerf\subset J\},\; \mathbb{L}=\{L|L\zg R_2\},\; \inv{f}(Y)=\{r\in R_1|f(r)\in Y\}
+\]
+则有：
+\[
+\left\{
+\begin{aligned}
+&(1)\forall J\in \mathbb{J},\; \inv{f}\circ f(J)=J,\text{且}\forall L\in \mathbb{L},\; f\circ \inv{f}(L)=L\\
+&(2)\forall J\in \mathbb{J},\; f(J)\in \mathbb{L},\text{且}\forall L\in \mathbb{L},\; \inv{f}(L)\in \mathbb{J}\\
+&(3)\sigma \colon \mathbb{J}\to \mathbb{L},\; J\mapsto f(J)\text{是一个一一对应}\\
+&(4)\forall J\in \mathbb{J},\; R_1/J\cong R_2/f(J)
+\end{aligned}\right.
+\]
+\begin{proof}
+(1)此时我们直接不去理会乘法结构，那么由群论中的满同态对应定理可以立即得到这个结论。如果回去翻看满同态对应哪个定理的证明会发现，(1)这个命题仅仅会用到群的性质，特别地(1)的后半句仅仅使用满射的性质。\\
+(2)($\forall J\in \mathbb{J},\; f(J)\in \mathbb{L}$):任取$J\in \mathbb{J},\; \forall r\in R_2$，由于f是满射，于是$\exists r'\in R_1$，使得$f(r')=r$。\\
+于是对$\forall f(j)\in f(J)$，有：
+\[
+\left\{
+\begin{aligned}
+&rf(j)=f(r')f(j)=f(r'j)\in f(J)\impliedby J\zg R_1\\
+&f(j)r=f(j)f(r')=f(r'j)\in f(J)\impliedby J\zg R_1
+\end{aligned}
+\right.
+\]
+由于f在加群层面是群同态，因此$f(J)$是$R_2$的加法子群。所以我们由理想判别法可知$f(J)$是$R_2$的理想。于是$f(J)\in \mathbb{L}$\\
+($\forall L\in \mathbb{L},\; \inv{f}(L)\in \mathbb{J}$):同理直接使用群论中的满同态对应定理，于是有$L\in \mathbb{L}$，因而$\inv{f}(L)$是$R_1$的加法子群，且$Kerf\subset \inv{f}(L)$。\\
+而对$\forall r\in R_1,\; l'\in \inv{f}(L)$，有：
+\[
+\left\{
+\begin{aligned}
+&f(r\cdot l')=f(r)\cdot f(l')\in L\implies rl'\in\inv{f}(L)\\
+&f(l'\cdot r)=f(l')\cdot f(r)\in L\implies l'r\in\inv{f}(L)
+\end{aligned}\right.
+\]
+可知$\inv{f}(L)\zg R_1\implies \inv{f}(L)\in \mathbb{J}$。\\
+(3):由(2)可知，$\sigma\colon \mathbb{J}\to \mathbb{L}$是一个良定义的满射。再由(1)可知，$\sigma$是单射，因而是双射。\\
+(4):同理我们先不理会环结构，那么我们由群论中的满同态基本定理有群同构：
+\[
+\phi\colon R_1/J\cong R_2/f(J),\; \ovl{r}\mapsto \ovl{f(r)}
+\]
+由于$R_1/J$和$R_2/f(J)$都是商环，我们也可以得到：
+\[
+\forall \ovl{a},\ovl{b}\in R_1/J,\; \phi(\ovl{a}\cdot\ovl{b})=\phi(\ovl{ab})=f(ab)=f(a)f(b)=\phi(\ovl{a})\phi(\ovl{b})
+\]
+\indent 其中，第一个等号使用商环中乘法的定义、第二个等号和第四个等号使用$\phi$这个映射本身的定义、第三个等号使用$f$是一个环同态的性质。因此我们可知$\phi$是一个环同态，再由其是一个群同构知它是一个双射，因而是一个环同构。
+\end{proof}
+
+
+
+

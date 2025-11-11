@@ -1,0 +1,281 @@
+\chapter*{Lecture05群作用与Sylow定理}
+\addcontentsline{toc}{chapter}{Lecture05群作用与Sylow定理}
+\stepcounter{chapter}
+
+\section{群作用}
+
+\kfj{定义：}设G是一个群，S是一个集合。若存在映射$*\colon G\times S\to S,\; (g,s)\mapsto g*s\in S$\\
+且满足：
+\[
+\begin{aligned}
+&(1)\forall x\in S,\; e*x=x.\; \text{其中}e\text{是群G的幺元}\\
+&(2)\forall g_1,g_2\in G,\; (g_1\cdot g_2)*x=g_1*(g_2*x),\; \forall x\in S
+\end{aligned}
+\]
+那么称群G在集合S上定义了一个作用，记作$G\action S$\\
+在大部分情况，直接称之为作用是不会产生歧义的。但是在某些情况，这也被称为左作用。当然我们也可以类似地定义右作用，只不过刚刚的定义中，两条要求需要加以修改：对于群G和集合S，若存在映射$*\colon S\times G\to S,\; (s,g)\mapsto s*g$，且满足
+\[
+\left\{
+\begin{aligned}
+(1)'\forall x\in S,\; x*s=x.\; \text{其中}e\text{是群G的幺元}\\
+(2)'\forall g_1,g_2\in G,\; x*(g_1\cdot g_2)=(x*g_1)*g_2,\; \forall x\in S
+\end{aligned}\right.
+\]
+右作用与左作用的不同之处很显然的就是群元和被作用元的位置关系发生了改变，但是这不是最本质的不同。我们不难发现左作用中群元的乘法与其作为映射而做复合的顺序是相同的，而右作用则不然。我们更倾向于把群作用中的群元看成算子，或者说映射，因而左作用更符合我们的直观。因此我们今后提及群作用，不特别声明的时候都视为左作用。
+\kfj{例：}（1）：对于群G定义作用$G\action G,\; g*x=g\cdot x$。易知这是一个群作用，称为群G到自身的平移。\\
+（2）：对于群G定义作用$G\action G,\; g*x=gx\inv{g}$\\
+那么有：$e*x=ex\inv{x}=x,\; (a\cdot b)*x=a(bx\inv{b})\inv{a}=a*(b*x)$，由此可知这是一个群作用，称为群G对自身的共轭作用。\\
+\kfj{定义：}在群作用$G\action S$中，取定$x\in S$\\
+\begin{align*}
+&(1):\text{称集合}Orb(x)=\{g*x|g\in G\}\text{为元素x在G作用下的轨道}\\
+&(2):\text{称集合}Stab(x)=\{g\in G|g*x=x\}\text{为元素x在G作用下的稳定化子}
+\end{align*}
+易知所定义的这两个集合都非空。\\
+\kfj{性质：}在群作用$G\action S$中，取定$x,y\in S$\\
+\begin{align*}
+&(1):\forall x\in S,\; Stab(x)<G\\
+&(2):\text{要么}Orb(x)=Orb(y),\;\text{要么}Orb(x)\cap Orb(y)=\varnothing
+\end{align*}
+\begin{proof}
+(1):易知$e\in Stab(x),\; \forall g\in Stab(x)$，有$g*x=x$。因此$\inv{g}*x=\inv{g}*(g*x)=(\inv{g}g)*x=e*x=x\implies \inv{g}\in Stab(x)$\\
+又$\forall a,b\in Stab(x),\; (ab)*x=a*(b*x)=a*x=x\implies ab\in Stab(x)$\\
+$\therefore Stab(x)<G$\\
+(2):设$Orb(x)\cap Orb(y)\neq \varnothing$，则$\forall g_1,g_2\in G$，使得$g_1*x=g_2*y$。\\
+于是，$\forall g\in G$，$\left\{
+\begin{aligned}
+&g*x=(g\cdot \inv{g_1}g_1)*x=(g\inv{g_1})*(g_1*x)=(g\inv{g_1})*(g_2*y)=(g\inv{g_1}g_2)*y\in Orb(y)\\
+&g*y=(g\cdot \inv{g_2}g_2)*y=(g\inv{g_2})*(g_2*y)=(g\inv{g_2})*(g_1*x)=(g\inv{g_2}g_1)*x\in Orb(x)
+\end{aligned}\right.$\\
+$\therefore Orb(x)\subset Orb(y),\; Orb(y)\subset Orb(x)\implies Orb(x)=Orb(y)$\\
+\end{proof}
+这告诉我们，两条轨道要么完全相等，要么无交。因此可知，群作用$G\action S$给出了集合$S$上的一个划分，我们受此启发来计算S的元素个数。\\
+\kfj{定理：（轨道公式）}设G是有限群，S是有限集。在群作用$G\action S$中，$\forall x\in S,\; |Orb(x)|=[G:Stab(x)]$\noteb{(注：这里是子群的指数，不是导群)}
+\begin{proof}
+取定$x\in S$，做映射$\varphi\colon G\to S,\; g\mapsto g*x$\\
+事实上，我们很容易知道：$Im\varphi =Orbv(x),\; \varphi(g)=\varphi(e)\iff g\in Stab(x)$\\
+\noteb{(注：值得注意的是，刚刚所定义的映射不是群同态，因为S只单纯作为集合出现，而不作为有群结构的集合。因此我们并不能直接使用同态基本定理。)}\\
+但是，我们可以类似地构造一个诱导出的映射$\ovl{\varphi} \colon G/Stab(x)\to Orb(x),\;\ovl{g}\mapsto\varphi(g)$\\
+其中，$G/Stab(x)$是由左旁集构成的商集，且在这个商集上不定义运算（事实上$Stab(x)$可以不是正规的）。\\
+\noteb{(注：此处使用左旁集而不是右旁集是因为群作用默认是左作用，这里换成右旁集的话会出现很大的麻烦，我们在下面的证明中就会看到为什么。)}\\
+先证明$\ovl{\varphi}$是一个良定义的映射：$g_1Stab(x)=g_2Stab(x)\iff \inv{g_2}g_1\in Stab(x)$\\
+$\iff \varphi(\inv{g_2}g_1)=x\iff (\inv{g_2})*(g_1*x)=x \implies g_2*[(\inv{g_2})*(g_1*x)]=g_2*x$\\
+$\iff (g_2\cdot \inv{g_2})*(g_1*x)=g_2*x\iff g_1*x=g_2*x\iff \ovl{\varphi}(g_1Stab(x))=\ovl{\varphi}(g_2Stab(x))$\\
+因此可知$\ovl{\varphi}$是良定义的映射，于是立即可知$\ovl{\varphi}$是满射。\\
+事实上，在证明$\ovl{\varphi}$良定义的过程中，只有一步不是等价符号。然而由于$g_2*[(\inv{g_2})*(g_1*x)]=g_2*x\implies \inv{g_2}*(g_2*[(\inv{g_2})*(g_1*x)])=\inv{g_2}*(g_2*x)\implies (\inv{g_2})*(g_1*x)=x$，因此这个推出符号其实也可以改为等价符号，于是有：$g_1Stab(x)=g_2Stab(x)\iff\ovl{\varphi}(g_1Stab(x))=\ovl{\varphi}(g_2Stab(x))$，因而是单射。\\
+综上可知，$\ovl{\varphi}$是双射，因此有$|G/Stab(x)|=|Orb(x)|\iff |Orb(x)|=[G:Stab(x)]$\\
+\end{proof}
+\kfj{推论：}若元素$x$和$y$处于同一个轨道之中，那么有$|Stab(x)|=|Stab(y)|$。
+\begin{proof}
+\indent 由于$x$和$y$处于同一个轨道之中，故$Orb(x)=Orb(y)\implies |Orb(x)|=|Orb(y)|\implies [G:Stab(x)]=[G:Stab(y)]\implies |Stab(x)|=|Stab(y)|$
+\end{proof}
+\kfj{定理：}（广义类方程）设群G和有限集S之间有已知的群作用$G\action S$，那么有：
+\[
+|S|=\sum [G:Stab(x)],\text{其中x遍历S中不同轨道的代表元}
+\]
+\begin{proof}
+由轨道公式立刻得到证明。
+\end{proof}
+\noteb{(注：)}1、如何理解这个求和？由于S是有限集，因此轨道数有限。我们取第$i$个轨道的某一个元素$x_i$，那么这个求和式展开来写就是$|S|=[G:Stab(x_1)]+\cdots [G:Stab(x_n)]$，（n为轨道数）\\
+2、$\forall x\in S,\; e*x=x$，因此可知$|S|$被轨道填满（即每个S中元素必定属于某个轨道）\\
+\kfj{定理：（类方程）}设G是有限群，$C$是群G的中心，$C(g)$是单元素集$\{g\}$的中心化子。那么有：
+\[
+|G|=|C|+\sum[G:C(x_i)],\; \text{其中}x_i \text{遍历那些非平凡共轭类的代表元}
+\]
+我们先来解释这个定理在说什么：\\
+\kfj{定义：}在G对自身的共轭作用$G\action G,\; g*x=gx\inv{g}$中，对于元素$x,y\in G$，若存在元素$g\in G$，使得$y=g*x=gx\inv{g}$，那么则称x和y是互相共轭的。此时$Orb(x)$称为$x$的共轭类，即所有与$x$共轭的元素。\\
+下面我们来看这个定理的证明。
+\begin{proof}
+对于$x\in C,\; \forall g\in G$，有$gx\inv{g}=g\inv{g}x=x\implies Orb(x)=\{x\}$。\\
+对于$x\notin C,\; Stab(x)=\{g\in G|gx\inv{g}=x\}=\{g\in G| gx=xg\}=C(x)$是x的中心化子。\\
+于是在广义类方程中，我们可知：$|G|=\sum [G:Stab(x)]$，其中x遍历不同的共轭类。我们人为地的将其分为两部分，$x\in C$的部分和$x\notin C$的部分。而已知$x\in C$时，$|Orb(x)|=1$，因此我们直接可以得到：
+\[
+|G|=\sum_{c\in C}|Orb(c)|+\sum|Orb(x_i)|=\sum_{c\in C}1+\sum[G:C(x_i)]=|C|+\sum[G:C(x_i)]
+\]
+其中$x_i$遍历那些非平凡共轭类的代表元。
+\end{proof}
+\noteb{(注：类方程时我们研究群内部结构时非常有用的工具，下面我们给出一个例子)}\\
+\kfj{例：}群G满足：$|G|=p^2$，其中$p$是素数，那么$G$是Abel群。
+\begin{proof}
+反证法：假设G不是交换群，那么由群的中心的定义可知，$C\varsubsetneq G$。又由于$C<G$，因此由Lagrange定理知：$|C|=p$或$|C|=1$。此时由于G非交换，故存在非平凡的共轭类。\\
+\indent ($|C|=p$)时，对于非平凡共轭类的代表元$y_i$而言，有$y_i\notin C$。由于中心$C$可与群中任意元素交换特别地可与$y_i$交换因此可知$C\subset C(y_i)$。\\
+易知$y_i$可与自己交换，因此有$y_i\in C(y_i)\implies C\varsubsetneq C(y_i)$。\\
+由第一节lecture结论可知，$C(y_i)<G$，因此再由Lagrange定理可知，$|C(y_i)|=p^2$，因而有$G=C(y_i)$。但是这意味着$y_i$可与群中任意元素交换，与$y_i\notin C$矛盾。\\
+\indent ($|C|=1$)时，此时由类方程可知，$\sum [G:Stab(x_i)]=p^2-1=(p+1)(p-1)$，其中$x_i$遍历那些非平凡共轭类的代表元。但是由于$x_i\notin C$，因此可知$C(x_i)\varsubsetneq G\implies |C(x_i)|=1$或$p\implies p\bigm|[G:Stab(x_i)]$。这与$\sum [G:Stab(x_i)]=p^2-1=(p+1)(p-1)$不被$p$整除矛盾。
+\end{proof}
+\kfj{命题：(Burnside定理)}设G时一个有限群，S是一个有限集。则在群作用$G\action S$中，记$N$是$G\action S$中轨道个数，$F(\sigma)=\{x\in S|\sigma*x=x\}$是$\sigma$的不动点集。那么有：
+\[
+N=\dfrac{1}{|G|}\sum_{\sigma\in G}|F(\sigma)|
+\]
+\begin{proof}
+我们先来看看$\sum_{\sigma\in G}|F(\sigma)|$是什么。\\
+\indent 事实上若换个角度求和，我们有：
+\[
+\sum_{\sigma\in G}|F(\sigma)|=\sum_{x\in S}|Stab(x)|=|\{(\sigma,x)\in G\times S|\sigma*x=x\}|
+\]
+然而我们可以对S按轨道进行分类，且我们由轨道公式的推论可知，相同轨道的元素的稳定化子具有相同的元素个数。\\
+于是有：
+\[
+\sum_{x\in S}Stab(x)=\sum_{x_i} |Orb(x_i)|\cdot |Stab(x_i)|
+\]
+其中$x_i$跑遍S中不同轨道的代表元。再由轨道公式可知：
+\[
+\sum_{x_i} |Orb(x_i)|\cdot |Stab(x_i)|=\sum_{x_i}[G:Stab(x_i)]\cdot |Stab(x_i)|=\sum_{x_i}|G|=N|G|
+\]
+于是有:
+\[
+\sum_{\sigma\in G}|F(\sigma)|=N|G|\implies N=\dfrac{1}{|G|}\sum_{\sigma\in G}|F(\sigma)|
+\]
+\end{proof}
+
+\section{Sylow定理}
+接下来我们来介绍一下群论中最重要的定理之一：Sylow定理。\\
+\kfj{定义：}（1）：若H是群，且存在素数$p$和正整数$n$，使得$|H|=p^n$，那么称H是一个p-群。特别地，若强调H是作为G的子群出现的，则称之为p-子群。\\
+\indent （2）：在有限群G中，我们由Lagrange定理可以知道，若$P$是G的一个p-子群，$|P|=p^n$，那么有$p^n\bigm| |G|$。进一步，若要求$p^n\bigm| |G|$但$p^{n+1}\nmid |G|$，那么称P是一个p-Sylow子群。\\
+\noteb{(注：我们从定义可以看出，在包含关系中，p-Sylow子群是G中的极大p-群，我们后续会用到这一性质)}\\
+\kfj{定理（Sylow定理）}：\\
+\indent \kfj{Sylow第一定理：}\noteb{(存在性)}：设G是一个有限群，$p$是一个素数。若$k\in \mathbb{N}^*,\; p^k\bigm| |G|$，那么G包含一个阶为$p^k$的子群。特别地若$p$是$|G|$的因子，则G的p-Sylow子群必然存在。\\
+\indent \kfj{Sylow第二定理：}\noteb{(共轭性)}：在有限群G中，设$P_1$和$P_2$均为G的p-Sylow子群，那么$P_1$和$P_2$互相共轭。(即$\exists g\in G$，使得$P_2=gP_1\inv{g}=\{gx\inv{g}|x\in P_1\}$)\\
+\indent \kfj{Sylow第三定理：}\noteb{(计数)}：在有限群G中，设$P$是G的p-Sylow子群，$r$是G全部p-Sylow子群的个数。那么有计算公式：
+\[
+\left\{
+\begin{aligned}
+&r\bigm|[G:P]\\
+&r\equiv 1 \;(mod\; p)
+\end{aligned}\right.
+\]
+在证明Sylow第一定理之前，我们先来看一个引理：\\
+\kfj{(Cauchy引理)}：设G是一个有限Abel群，p是素数且$p\bigm||G|$，则$\exists g\in G$，使得$|<g>|=p$\\
+\begin{proof}
+\noteb{(证明逻辑：在G中取循环群$<a>$，若$p\bigm||<a>|$，则找到（参见Lecture3）；若$p\nmid |<a>|$，那么直接商去这个循环群：$G/<a>$（交换群中子群皆正规）。重复这个操作，直到最后所得商群阶数为p，从而时p阶循环群。)}\\
+事实上，上述思路中“一直除去”的操作不易给出详细描述，我们采用归纳法来达到相同效果。
+我们首先使用数学归纳法，对G的阶数进行归纳。易知$|G|\leq 3$时命题显然成立。因此我们假设Cauchy引理对于所有小于G的阶数的群都成立。\\
+任取$a\in G,\; a\neq e$\\
+\indent (1)：若$p\bigm| |<a>|$，那么依循环群的性质，我们可以找到$<a>$的p阶循环子群。\\
+\indent (2)：若$p\nmid |<a>|$，由于G是Abel群，因此$<a>\zg G$。故做商群$G/<a>$，其中$|<a>|>1$，因此由归纳假设我们在商群$G/<a>$中可找到元素$\ovl{h}$，使得$|<\ovl{h}>|=p$。\\
+由循环群性质我们有：$(\ovl{h})^n=\ovl{e}\iff p|n$，即$h^n\in <a>\iff p|n$。\\
+而对于循环群$<h>$的阶数n，我们有：$h^n=e\in <a>$，因此可知$p\bigm| |<h>|$。从而再次使用循环群的性质来找到G中元素$g$，使得$|<g>|=p$。\\
+于是有归纳法可知，对于任意阶数的有限交换群而言，Cauchy引理皆成立。
+\end{proof}
+下面我们来证明Sylow第一定理。\\
+\kfj{(证明Sylow第一定理)}：已知G是有限群，$p^k\bigm| |G|$。仍使用数学归纳法，$|G|\leq 3$时命题显然成立。我们假设Sylow第一定理对所有阶数小于$|G|$的群都成立。\\
+\noteb{(注：这个归纳假设既不限制群的阶数，也不限制指数$k$)}
+考虑G的类方程：
+\[
+|G|=|C|+\sum[G:C(x_i)],\;\text{其中}x_i \text{遍历那些非平凡共轭类的代表元}
+\]
+\indent(1):若$p\nmid |C|$，那么此时可知存在非平凡共轭类的代表元$x_j$，使得$p\nmid [G:C(x_j)]$，否则与$|G|$可被p整除矛盾。于是
+\[
+|C(x_j)|=|G|/[G:C(x_j)]\implies p^k\bigm |C(x_j)|
+\]
+此时再由$x_j$在非平凡共轭类中可知$|C(x_j)|<|G|$，使用归纳假设，$C(x_j)$中包含$p^k$阶子群，因而$G$中也包含$p^k$阶子群。\\
+\indent(2):若$p\bigm| |C|$，那么由Cauchy引理，$\exists c\in C$，使得$|<c>|=p$。由于$c\in C$，故$<c>\zg G$。考虑商群$G/<c>$，有$p^{k-1}\bigm| |G/<c>|$。那么由归纳假设可知，存在$G/<c>$的子群$\tilde{H}$，使得$|\tilde{H}|=p^{k-1}$。\\
+于是由满同态对应定理：在自然同态$\pi\colon G\to G/<c>$中，G有唯一一个子群H，使得$\pi(H)=\tilde{H}$。\\
+事实上，有：
+\[
+\tilde{H}=\pi(H)=H/<c>\implies |H|=p^{k-1}\cdot p=p^k
+\]
+此时我们就找到了G的$p^k$阶子群。\\
+\noteb{(注：若对归纳假设可以不限制指数$k$的合理性有疑问的话，可以试想，从4阶群开始，对4的每个素因子p和每个p的幂次$p^k$都走一遍上述证明过程。将4阶群处理完毕后处理5阶群，以此类推。)}\\
+在证明Sylow第二定理之前，我们先来看一个引理：\\
+\kfj{引理：}若H是G的$p^k$阶子群，P是G的某个p-Sylow子群，那么$\exists g\in G$，使得$H\subset gP\inv{g}$，即H含在P的某个共轭子群之中。\\
+\begin{proof}
+我们喜欢相等关系，所以我现在要把命题中的条件做一个变形。
+\[
+\begin{aligned}
+H\subset gP\inv{g}&\iff \forall h\in H,\; h\in gP\inv{g} \iff \forall h\in H,\; \inv{g}hg\in P\\
+&\iff \forall h\in H,\; (hg)P=gP\iff \forall h\in H,\; h(gP)=gP
+\end{aligned}
+\]
+于是考虑$\Omega=\{gP|g\in G\}$是P在G上划分出的所有陪集。\\
+自然地，我们定义群作用$H\action \Omega,\; h*(gP)=(hg)P$。且有广义类方程：
+\[
+|\Omega|=\sum[G:Stab(g_iP)],\;\text{其中}g_iP\text{跑遍所有轨道}
+\]
+由Lagrange定理可知：
+\[
+|\Omega|=[G:P]=\frac{|G|}{|P|}
+\]
+又由于P是G的p-Sylow子群，因此由p-Sylow子群的极大性，有：$p\nmid |G|$\\
+因此从广义类方程中可看出：$\exists g_0\in G$，使得$p\nmid [H:Stab(g_0P)]$。而$|H|=p^k$，且有
+\[
+[H:Stab(g_0P)]=\frac{|H|}{|Stab(g_0P)|}
+\]
+可知，$[H:Stab(g_0P)]$只能是$p$的幂次。因此再由$p\nmid [H:Stab(g_0P)]$：
+\[
+[H:Stab(g_0P)]=1\implies H=Stab(g_0P)\implies \forall h\in H,\; h(gP)=gP\iff H\subset gP\inv{g}
+\]
+\end{proof}
+\kfj{证明Sylow第二定理}：设$P_1$和$P_2$是G的两个p-Sylow子群，记$|P_1|=|P_2|=p^m$。\\
+于是由引理，$\exists g\in G$，使得$P_1\subset gP_2\inv{g}$。\\
+而$\varphi_g\colon G\to G,\; x\mapsto gx\inv{g}$是G上的内自同构，特别地是双射。因此有：
+\[
+|P_1|=|P_2|=|\varphi_g(P_2)|=|gP_2\inv{g}|
+\]
+可知$P_1=gP_2\inv{g}$\\
+\kfj{证明Sylow第三定理}通过Sylow第二定理，我们已然知道，所有的p-Sylow子群都互相共轭，但我们不知道如何计算G一共有多少个p-Sylow子群。\\
+取定P是G的一个p-Sylow子群，定义$Syl(p)=\{gP\inv{g}|g\in G\}$。由Sylow第二定理知，$Syl(p)$包含所有的p-Sylow子群。又由内自同构是双射可知，$Syl(p)$是G的所有p-Sylow子群组成的集合。\\
+此时我们来考察一下什么时候$g_1P\inv{g_1}$和$g_2P\inv{g_2}$表示的是同一个p-Sylow子群：
+\[
+\begin{aligned}
+g_1P\inv{g_1}=g_2P\inv{g_2}&\iff (\inv{g_2}g_1)P\inv{(\inv{g_2}g_1)}=P\iff \inv{g_2}g_1\in N(P)\\
+&\iff g_1N(P))=g_2N(P),\;\text{其中}N(P)\text{是P的正规化子}
+\end{aligned}
+\]
+于是可建立一一对应：
+\[
+f\colon G/N(P)\to Syl(p),\; gN(P)\mapsto gP\inv{g}
+\]
+其中$G/N(P)$是由子群$N(P)$的左旁集构成的商集（无运算结构）。我们由上面的分析知，这个映射是良定义的，且是一个双射。\\
+\noteb{(注：可理解为：$N(P)$作为G的子群对G有一个分划，划分出来的每个区域对应一个p-Sylow子群)}\\
+于是由Lagrange定理可知，$r=|Syl(p)|=[G:N(P)]$。再由于：
+\[
+[G:P]=[G:N(P)]\cdot [N(P):P]=r\cdot [N(P):P]
+\]
+故有$r\bigm| [G:P]$\\
+此时设$Syl(p)=\{P_1,\cdots,P_r\}$，考虑共轭作用：$P_1\action Syl(p),\; a*X=aX\inv{a}$\\
+其中广义类方程：
+\[
+|Syl(p)|=\sum[P_1:Stab(P_i)],\; \text{其中}P_i\text{跑遍所有共轭类}
+\]
+我们现在来研究一下$Stab(P_i)$是什么：$Stab(P_i)=\{g\in P_1|gP_i\inv{g}=P_i\}=P_1\cap N(P_i)$\\
+\indent ($i=1$时)，$Stab(P_1)=P_1\cap N(P_1)=P_1\implies [P_1:StabP_1]=1$\\
+\indent ($i\neq 1$时)，假设$P_1\cap N(P_i)=P_1$，则$P_1<N(P_i)$\\
+由Sylow子群的极大性可知，$P_1$和$P_i$也是$N(P_i)$的p-Sylow子群。于是再由Sylow第二定理可知：
+\[
+\exists g_0\in N(P_i),\;\text{使得}P_1=g_0P_i\inv{g_0}=P_i
+\]
+这与$i\neq 1$矛盾，因此$P_1\cap N(P_i)\varsubsetneq P_1\implies [P_1:Stab(P_i)]>1$\\
+又由于$P_1$是p-Sylow子群，所以由上述讨论知：
+\[
+p\nmid [P_1:Stab(P_i)]\iff i=1,\;\text{且} [P_1:StabP_1]=1
+\]
+于是立即得到$r\equiv 1 \;(mod\; p)$\\
+\kfj{例：}证明阶数为$20449=11^2\times 13^2$的群G是Abel群。
+\begin{proof}
+由Sylow第三定理知，G的11-Sylow子群和13-Sylow子群都有且只有一个，不妨分别记之为A和B。$|A|=11^2;\; |B|=13^2$，此时可知A和B都是Abel群\noteb{(参见Burnside定理前一个例子)}。\\
+再利用Sylow第二定理：
+\[
+\forall g\in G,\; gA\inv{g}=A,\; gB\inv{g}=B
+\]
+\noteb{(这是因为A的共轭子群是11-Sylow子群，而11-Sylow子群有且只有一个，故只能是A。B同理)}\\
+于是可知：$A\zg G,\; B\zg G$。同时有：
+\[
+\left\{
+\begin{aligned}
+&A\cap B<A\\
+&A\cap B<B
+\end{aligned}\right.
+\implies 
+\left\{
+\begin{aligned}
+&|A\cap B|\bigm||A|\\
+&|A\cap B|\bigm||B|
+\end{aligned}\right.
+\implies |A\cap B|=1
+\]
+此时可知G是A和B的内直积，因此由A和B都是Abel群可知G是Abel群。
+\end{proof}
+
+
+
+

@@ -1,0 +1,504 @@
+\chapter*{Lecture07整区}
+\addcontentsline{toc}{chapter}{Lecture07整区}
+\stepcounter{chapter}
+
+\section{分式域}
+我们已经知道，从整数可以构建有理数域。事实上这个过程可以进行推广。\\
+\kfj{定义：}对于R是一个整区，记0和1分别是R的零元和幺元。对于
+\[
+R\times R^*=\{(r,r^*)|r\in R,\; r^*\in R^*\}
+\]
+我们在$R\times R^*$上定义等价关系：
+\[
+(a,b)\sim(c,d)\text{当且仅当}ad=bc
+\]
+我们稍后会验证这确实是一个等价关系，此时令$F=(R\times R^*)/\sim$，并记$(a,b)$的等价类为$\dfrac{a}{b}$。\\
+我们在F上定义运算：
+\[
+\left\{
+\begin{aligned}
+&(1)(\text{加法}) +\colon F\times F\to F ,\; (\frac{a}{b},\frac{c}{d})\mapsto \frac{ad+bc}{bd}\\
+&(2)(\text{乘法}) \cdot\colon F\times F\to F ,\; (\frac{a}{b},\frac{c}{d})\mapsto \frac{ac}{bd}
+\end{aligned}\right.
+\]
+我们稍后会验证上述运算良定义，并且F在上述运算下构成一个域。我们称F是R的分式域。\\
+\noteb{(注：我们要搞清楚的是，一个环的分式域只有一个（就是上述过程所构造的域）。很多时候我们会遇到环R可以直接作为一个更大域F的子环，且这个更大的域F正好同构于R的分式域。事实上这个时候F一定不是R的分式域)}\\
+\kfj{命题：}\\
+\indent (1):上述定义中，“$\sim$”是一个等价关系。\\
+\indent (2):上述定义中，F上的两个运算良定义。\\
+\indent (3):F在上述运算下构成一个域。\\
+\begin{proof}
+(1):(自反性):由于R是交换环，于是有$\forall (a,b)\in R\times R^*,\; ab=ba$，即$(a,b)\sim (a,b)$。\\
+\noteb{这里我们也可以看出，如果你希望一个环可以从他构做分式域，那么交换性是必要条件。}\\
+(2):(对称性):$(a,b)\sim (c,d)\iff ad=bc\iff bc=ad \iff (c,d)\sim (a,b)$\\
+(3):(传递性):若$(a,b)\sim (c,d),\; (c,d)\sim (x,y)$，则有：$ad=bc$，$cy=dx$，我们希望证明$ay=bx$。这个时候我们可以做这样一个操作：
+\[
+ad=bc\implies ady=bcy\implies ady=bdx \implies ayd=bxd\implies (ay-bx)d=0
+\]
+其中，由于$d\in R^*$，且R是整区，特别地R是整的，因此由消去律：
+\[
+(ay-bx)d=0\implies ay-bx=0\iff ay=bx\iff (a,b)\sim(x,y)
+\]
+\noteb{从这里我们可以看出，若想构做分式域，则这个环必须是整的。}\\
+于是我们验证了上述定义中，“$\sim$”是一个等价关系。\\
+(2)(加法):设$(a,b)\sim (a',b'),\; (c,d)\sim (c',d')$。于是有：$ab'=ba',\; cd'=dc'$，且依定义有：
+\[
+\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd},\; \frac{a'}{b'}+\frac{c'}{d'}=\frac{a'd'+b'c'}{b'd'}
+\]
+我们从等价关系的定义去验证：
+\[
+(ad+bc)b'd'-bd(a'd'+b'c')=adb'd'+bcb'd'-bda'd'-bdb'c'=(adb'd'-bda'd')+(bcb'd'-bdb'c')=0
+\]
+因此可知:
+\[
+\frac{ad+bc}{bd}=\frac{a'd'+b'c'}{b'd'}
+\]
+即上述定义的加法是良定义的。\\
+(乘法):设$(a,b)\sim (a',b'),\; (c,d)\sim (c',d')$。于是有：$ab'=ba',\; cd'=dc'$，且依定义有：
+\[
+\frac{a}{b}\cdot \frac{c}{d}=\frac{ac}{bd},\; \frac{a'}{b'}\cdot \frac{c'}{d'}=\frac{a'c'}{b'd'}
+\]
+我们仍从等价关系的定义去验证：
+\[
+acb'd'-bda'c'=0\implies \frac{ac}{bd}=\frac{a'c'}{b'd'}
+\]
+即上述定义的乘法是良定义的。\\
+(3)此时我们只需证明$(F,+)$和$(F^*,\cdot)$都构成Abel群即可。\\
+$(F,+)$:由于R是整区，于是有：
+\[
+\forall \frac{a}{b},\frac{c}{d},\frac{x}{y}\in F,\; (\frac{a}{b}+\frac{c}{d})+\frac{x}{y}=\frac{(ad+bc)y+bdx}{bdy}
+\]
+而
+\[
+\frac{a}{b}+(\frac{c}{d}+\frac{x}{y})=\frac{ady+b(cy+dx)}{bdy}=\frac{(ad+bc)y+bdx}{bdy}
+\]
+因此可知加法具有结合律。易知：
+\[
+\forall \frac{a}{b}\in F,\; \frac{a}{b}+\frac{0}{1}=\frac{a}{b}=\frac{0}{1}+\frac{a}{b},\; \frac{a}{b}+\frac{-a}{b}=0
+\]
+因此F在加法下构成一个群，并且再由R的交换性可知：
+\[
+\forall \frac{a}{b},\frac{c}{d}\in F,\; \frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}=\frac{cb+da}{db}=\frac{c}{d}+\frac{a}{b}
+\]
+因此$(F,+)$是一个Abel群。\\
+$(F^*,\cdot)$:我们由R中乘法的结合律立即得到：
+\[
+\forall \frac{a}{b},\frac{c}{d},\frac{x}{y}\in F,\;(\frac{a}{b}\cdot\frac{c}{d})\cdot\frac{x}{y}=\frac{(ac)x}{(bd)y}=\frac{a(cx)}{b(dy)}=\frac{a}{b}\cdot (\frac{c}{d}\cdot \frac{x}{y})
+\]
+故$F^*$中乘法具有结合律。易知：
+\[
+\forall \frac{a}{b}\in F^*,\; \frac{a}{b}\cdot \frac{1}{1}=\frac{a}{b}=\frac{1}{1}\cdot\frac{a}{b},\; \frac{a}{b}\cdot \frac{b}{a}=\frac{1}{1}=\frac{b}{a}\cdot\frac{a}{b}
+\]
+因此$F^*$在此乘法下构成一个群。再由R的交换性：
+\[
+\forall \frac{a}{b},\frac{c}{d}\in F^*,\; \frac{a}{b}\cdot \frac{c}{d}=\frac{ac}{bd}=\frac{ca}{db}=\frac{c}{d}\cdot\frac{a}{b}
+\]
+于是$(F^*,\cdot)$是一个Abel群。综上可知，F是一个域。
+\end{proof}
+\kfj{记号：}在上述证明中，我们知道$\dfrac{0}{1}$和$\dfrac{1}{1}$分别是F的零元和幺元，那么我们约定在分式域中，就记$\dfrac{0}{1}$为0，记$\dfrac{1}{1}$为1。\\
+\kfj{定理：}对于整区R，设F是R的分式域，映射$i\colon R\to F,\; r\mapsto \frac{r}{1}$称为环R到其分式域的标准嵌入。任取一个环同态$g\colon R\to F'$，且满足$F'$是域，则使得下图交换的环同态$h\colon F\to F'$存在且唯一。
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+R \arrow[r, "g"] \arrow[d, "i"'] & F' \\
+F \arrow[ru, dashed, "h"'] &
+\end{tikzcd}
+\]
+\begin{proof}
+(存在性):做$h\colon F\to F',\frac{a}{b}\mapsto g(a)\inv{[g(b)]}$。我们先证明$h$是良定义的。\\
+设$(a,b)\sim (a',b')$，则有$ab'=ba'$\noteb{(注：R中元素不可直接取逆)}。由于$F'$是域，故有：\\
+\[
+g(ab')=g(ba')\iff g(a)g(b')=g(b)g(a')\iff g(a)\inv{[g(b)]}=g(a')\inv{[g(b')]}\iff h(\frac{a}{b})=h(\frac{a'}{b'})
+\]
+于是可知$h$是良定义的映射。\\
+(再证$h$是群同态)设$\dfrac{a}{b},\dfrac{c}{d}\in F$，则有：
+\[
+h(\dfrac{a}{b}+\dfrac{c}{d})=h(\frac{ad+bc}{bd})=g(ad+bc)\inv{[g(bd)]}
+\]
+由于$g\colon R\to F'$是环同态，因此有：
+\[
+h(\dfrac{a}{b}+\dfrac{c}{d})=[g(a)g(d)+g(b)g(c)]\inv{[g(b)]}\inv{[g(d)]}=g(a)\inv{[g(b)]}+g(c)\inv{[g(d)]}=h(\frac{a}{b})+h(\frac{c}{d})
+\]
+因此可知$h$是加群同态。\\
+(再证$h$是环同态):设$\dfrac{a}{b},\dfrac{c}{d}\in F$，由于$F'$是域，则有：
+\[
+h(\frac{a}{b}\cdot \frac{c}{d})=h(\frac{ac}{bd})=g(ac)\inv{[g(bd)]}=g(a)\inv{[g(b)]}\cdot g(c)\inv{[g(d)]}=h(\frac{a}{b})\cdot h(\frac{c}{d})
+\]
+因此可知$h$是环同态，此时易知$h$满足$hi=g$，即所写交换图交换。\\
+(唯一性):设$f\colon F\to F'$是环同态，且满足$fi=g$。\\
+那么可知：$\forall \dfrac{r}{1}\in F,\; f(\dfrac{r}{1})=fi(r)=g(r)$\\
+而由于$f$是环同态可知，$\forall \dfrac{r}{1}\in F^*,\; f(\dfrac{1}{r})=f(\inv{\left(\dfrac{r}{1}\right)})=\inv{f(\dfrac{1}{r})}=\inv{[g(r)]}$。\\
+于是我们有：
+\[
+\forall \frac{a}{b}\in F,\; f(\frac{a}{b})=f(\frac{a}{1}\cdot \frac{1}{b})=f(\frac{a}{1})\cdot f(\frac{1}{b})=g(a)\inv{[g(b)]}
+\]
+于是可知，满足该条件的环同态唯一。
+\end{proof}
+\indent 上述定理有时也称为“分式域的泛性质”，泛性质一般都包含“存在性”和“唯一性”两个关键的性质，它们会帮我们简洁又漂亮地解决一些问题。下面我们会见到这样的“泛性质”将会有怎样强大的功能。\\
+\kfj{例：}$\mathbb{Z}$的分式域与$\mathbb{Q}$同构。
+\begin{proof}
+设$F$是$\mathbb{Z}$的分式域，我们直接构造映射：
+\[
+\gamma \colon \mathbb{Q}\to F,\; \dfrac{p}{q}\mapsto \dfrac{p}{q}
+\]
+\noteb{(注：上述映射两侧的分式具有不同的含义，$F$中的分式意为等价类，$\mathbb{Q}$中的分式意为有理数。)}\\
+\indent 先证明$\gamma$是良定义的。在$\mathbb{Q}$中，有:
+\[
+\frac{p}{q}=\frac{p'}{q'}\iff pq'=qp'\iff pq'-qp'=0
+\]
+\indent 其中第一个等价符号是由于$\mathbb{Q}^*$在乘法下构成一个群从而有消去律；第二个等价符号是由于$\mathbb{Q}$具有环结构因而可以取加法逆元。而依定义在$F$中有：
+\[
+\frac{p}{q}=\frac{p'}{q'}\iff pq'-qp'=0
+\]
+\indent 因此可知$\gamma$是一个良定义的单射。于是从$\gamma$的形式来看易知其是一个满射，再由$F$和$\mathbb{Q}$上的运算可知$\gamma$是一个群同态，从而是一个群同构。
+\end{proof}
+
+\kfj{命题：}设$R$是域，则依定义知$R$一定是整区。于是设$F$是$R$的分式域，则有结论：
+\[
+\phi\colon F\to R,\text{是环同构}
+\]
+\begin{proof}
+\indent 对于标准嵌入$I\colon R\to F$，我们应用分式域的泛性质，并直接取定理中的“$F'$”为$F$本身。于是可知使得下图交换的环同态$h\colon F\to F'$存在且唯一：
+\[
+\begin{tikzcd}[row sep=large, column sep=large]
+R \arrow[r, "i"] \arrow[d, "i"'] & F \\
+F \arrow[ru, dashed, "h"'] &
+\end{tikzcd}
+\]
+\indent 而事实上，恒等映射$\mathrm{Id}_F\colon F\to F$是环同态且满足：$\mathrm{Id}_F\circ i=i$，因此由唯一性知：必有$h=\mathrm{Id}_F$。这其实告诉我们此时对于映射$i$的复合具有消去律，即：若环同态$h\colon F\to F$，满足$hi=i$，则必有$h=\mathrm{Id}_F$。\\
+\indent 下面我们再取$F'$就是$R$，这是由于此时$R$是一个域。以及环同态$\mathrm{Id}_R\colon R\to R $是R上的恒等同态。于是再由泛性质可得：使得下图交换的环同态$\phi\colon F\to R$存在且唯一。
+\[
+\begin{tikzcd}[row sep =large, column sep =large]
+ & F\arrow[d,dashed,"\phi"']\\
+R\arrow[ru,"i"]\arrow[r,"\mathrm{Id}_R"] & R
+\end{tikzcd}
+\]
+\indent 于是我们可知：$\phi i=\mathrm{Id}_R$。易知恒等映射满足：$i\circ \mathrm{Id}_R=i$，因此也有交换图：
+\[
+\begin{tikzcd}[row sep = large, column sep = large]
+R\arrow[r,"\mathrm{Id}_R"]\arrow[rd,"i"'] & R\arrow[d,"i"]\\
+ & F
+\end{tikzcd}
+\]
+我们把上述交换图拼在一起得到：
+\[
+\begin{tikzcd}[row sep =large, column sep =large]
+ & F\arrow[d,dashed,"\phi"]\\
+R\arrow[ru,"i"]\arrow[r,"\mathrm{Id}_R"]\arrow[rd,"i"'] & R\arrow[d,"i"]\\
+ & R
+\end{tikzcd}
+\]
+\indent 这个时候我们沿着这个图的最外圈，也就是左边的$R$通过$i$指向F，再通过$\phi$和$i$向下指向$R$，这条路径应该等价于从左边的$R$直接指向右下角的$R$。于是可知：$i\phi\circ i=i\implies i\phi=\mathrm{Id}_F$ 。我们综合上面得到的关系：
+\[
+\left\{
+\begin{aligned}
+&\phi i=\mathrm{Id}_R\\
+&i \phi=\mathrm{Id}_F
+\end{aligned}\right. 
+\]
+因此可知环同态$\phi\colon F\to R$是环同态。
+\end{proof}
+\kfj{推论：}互不同构的整区可以有互相同构的分式域。
+\begin{proof}
+可知$\mathbb{Z}$不是域，$\mathbb{Z}$的分式域与$\mathbb{Q}$同构。而由命题知$\mathbb{Q}$的分式域与其自身同构。因此此时有$\mathbb{Z}$与$\mathbb{Q}$不同构，但是他们的分式域是互相同构的。
+\end{proof}
+
+\section{唯一析因环UFD}
+
+\kfj{定义：}设R是整区，则给出如下定义：\\
+\indent (1)：R中所有单位(unit)，即可逆元，所组成的集合记为$U$。易知$U$在环$R$的乘法下构成一个Abel群，我们称之为环$R$的单位群。\\
+\indent (2)：对于$R^*$中元素$r$，若存在$a,b\in R^*$，使得$a\cdot b=r$，则称$a$是$r$的因子，称$a$整除$r$，记为$a|r$。（同理$b$也是$r$的因子，也有$b|r$）\\
+\indent (3)：$\forall r\in R^*$，对于单位群中的元素$u$，可知：$r=(u\cdot \inv{u})r=u(\inv{u}\cdot r)\implies u|r$。这件事对于所有的元素$r$都成立，因此此时$u$称为$r$的一个平凡因子。\\
+\indent (4)：对于$a,b\in R^*$，若$a|b$且$b|a$，则称$a$和$b$是相伴的，记为$a\sim b$。\\
+\kfj{性质：}
+\[
+\left\{
+\begin{aligned}
+&\text{1、}\forall a,b\in R^*,\; a\sim b\iff \exists u\in U,\text{使得}ua=b\\
+&\text{2、"}\sim\text{"是一个等价关系，且}a\sim b,\; c\sim d\text{同时成立意味着}ac\sim bd\\
+&\text{3、}u\in U\iff u\sim 1
+\end{aligned}\right.
+\]
+\begin{proof}
+\indent 1、($\impliedby$)此时有$ua=b$和$a=\inv{u}b$，因此$a|b,\; b|a$，因而有$a\sim b$\\
+($\implies$)此时可知$a|b$且$b|a$，即$\exists x,y\in R^*$使得$xb=a,\; ya=b$。于是有$y(xb)=b$，即$(yx)b=b$。在整区中有消去律，于是得到$yx=1$。由交换性有$xy=yx=1$，因此$x$和$y$都是可逆元。由此我们得到：$ya=b,\; y\in U$。\\
+\indent 2、由性质1立即可知$"\sim"$是一个等价关系，下面我们来看对于$a\sim b$且$c\sim d$，我们设$u,v\in U$，使得$ua=b,\; vc=d$。于是由整区的交换性，$bd=(ua)(vc)=u(av)c=u(va)c=(uv)(ac)\implies bd\sim ac$\\
+\indent 3、由性质1可知$u\sim 1\iff \exists v\in U$使得$uv=1$。而$u\in U\iff \exists v\in R^*$使得$uv=1$。事实上若$uv=1$，则$u$和$v$都可逆，因此必有$u,v\in U$，于是可知$\exists v\in R^*$使得$uv=1$$\iff \exists v\in U$使得$uv=1$。综上可知有$u\sim 1\iff u\in U$
+\end{proof}
+\kfj{定义：}
+\[
+\begin{aligned}
+&(1)\text{对于}a,b\in R^*,\; \text{若}a|b,\text{但是}b\nmid a,\; \text{则称}a\text{是}b\text{的真因子}\\
+&(2)\text{对于}R^*-U\text{中元素$r$，若$r$的真因子只有单位(unit)，则称$r$是不可约元素，否则称$r$是可约元。}\\
+&(3)\text{对于}R^*-U\text{中元素$p$，若对任意}a,b\in R^*\text{满足}p|a\cdot b\text{都可以得出}p|a\text{或}p|b,\; \text{则称p是素元素}\\
+\end{aligned}
+\]
+\noteb{(注：其中素元素的定义也可以陈述为：$p\nmid a$且$p\nmid b\implies p\nmid a\cdot b$)}\\
+\kfj{命题：}a的真因子是与a不相伴的因子（易证）\\
+\kfj{命题：}素元素是不可约元素
+\begin{proof}
+\indent 设$p$是素元素，且$a$是$p$的真因子，则依定义有$a\mid p$，但$p\nmid a$。此时我们设$p=ra$，其中$r\in R^*$。于是有$p\mid ra$，再由于$p$是素元素，且$p\nmid a$，于是有$p\mid r$。此时再由定义可知：$\exists v\in R^*$，使得$vp=r$，从而有$vpa=p\iff p(va-1)=0$。由于整区中有消去律，因此可知$va=1$，即$a\in U$。因此可知$p$是不可约元素。
+\end{proof}
+\kfj{命题：}不可约元素不一定是素元素
+\begin{proof}
+考虑环：
+\[
+\mathbb{Z}[\sqrt{-5}]=\{a+b\sqrt{-5}|a,b\in \mathbb{Z}\}
+\]
+(Step1):先证明$\mathbb{Z}[\sqrt{-5}]$是整区\\
+考虑其中减法：
+\[
+(a+b\sqrt{-5})-(c+d\sqrt{-5})=(a-c)+(b-d)\sqrt{-5}\in \mathbb{Z}[\sqrt{-5}]
+\]
+考虑其中乘法：
+\[
+(a+b\sqrt{-5})\cdot (c+d\sqrt{-5})=(ac-5bd)+(bc+ad)\sqrt{-5}\in \mathbb{Z}[\sqrt{-5}]
+\]
+于是可知$\mathbb{Z}[\sqrt{-5}]$在复数乘法下构成一个环。同时有：
+\[
+(a+b\sqrt{-5})\cdot (c+d\sqrt{-5})=0\iff (ac-5bd)+(bc+ad)\sqrt{-5}=0
+\]
+\indent 于是$ac=5bd,\; ad=-bc$。前式同时乘$d$得：$acd=5bd^2\iff 5bd^2+bc^2=0\iff b(5d^2+c^2)=0$。于是由整数的性质知，此时有要么$b=0$，要么$c=d=0$。\\
+\indent 若$c$和$d$不同时为0，则有$b=0$，于是带入原式有：
+\[
+a(c+d\sqrt{-5})=0\iff ac+ad\sqrt{-5}=0\iff ac=ad=0\implies a=0
+\]
+此时则可知$a=b=0$，即$a+b\sqrt{-5}=0$。\\
+\indent 若$c=d=0$，则$c+d\sqrt{-5}=0$。于是可知$\mathbb{Z}[\sqrt{-5}]$是整的。易知$\mathbb{Z}[\sqrt{-5}]$是交换环，且幺元为整数$1$，因此综上可知$\mathbb{Z}[\sqrt{-5}]$是整区。\\
+(Step2):求$\mathbb{Z}[\sqrt{-5}]$的单位群$U$\\
+\indent 取$\alpha\in U$，不妨设$\alpha=x+y\sqrt{-5}$，我们取复数模长有：${|\alpha|}^2=x^2+5y^2$。由于$\alpha\in U$，故存在$\beta\in {\mathbb{Z}[\sqrt{-5}]}^*$使得$\alpha\cdot \beta=1$，于是由复数取模长性质得：
+\[
+{|\alpha\cdot \beta|}^2=1\iff {|\alpha|}^2\cdot{|\beta|}^2=1
+\]
+\indent 此时由于${|\alpha|}^2$和${|\beta|}^2$都是正整数，因此有${|\alpha|}^2={|\beta|}^2=1$，特别地，有$x^2+5y^2=1$。事实上，若$y\neq 0$，则可知$x^2+5y^2=\geq 5$，不合题。因此必有$y=0$，从而有$a=\pm 1$，即$\alpha=\pm 1,\; \implies U\subset\{1,-1\}$。而不难证明$1$和$-1$都是$\mathbb{Z}[\sqrt{-5}]$中得可逆元，因此有：$U=\{1,-1\}$。\\
+(Step3):证明整数$3$在$\mathbb{Z}[\sqrt{-5}]$中是不可约元素，但不是素元素。\\
+\indent 设$\alpha$是$3$的一个真因子，且有$\alpha\cdot \beta=3$，设$\alpha=a+b\sqrt{-5}$。则可知：
+\[
+{|\alpha|}^2\cdot{|\beta|}^2={|\alpha\cdot \beta|}^2=3^2=9
+\]
+于是由整数性质知：${|\alpha|}^2=1$或$3$或$9$。\\
+(${|\alpha|}^2=9$时)，有整数${|\beta|}^2=1$，因此$\beta\in U\implies \alpha\sim 3$，故$\alpha$不是$3$的真因子。\\
+(${|\alpha|}^2=3$时)，有$a^2+5b^2=3$。事实上当$b=0$时，有$a^2=3$在整数中无解（$|a|\geq 2$时 $a^2\geq 4>3$；$0\leq |a|\leq 1$时 $a^2\leq 1<3$）；当$b\neq 0$时，$a^2+5b^2\geq 5>3$因此也无解，故此时不合题。\\
+(${|\alpha|}^2=1$时)，有$\alpha\in U$，是单位。\\
+\indent 于是我们知道，$3$的真银子只能是单位，故$3$是不可约元。而观察可知：
+\[
+3\times 3=9 =(2+\sqrt{-5})(2-\sqrt{-5})\implies 3|(2+\sqrt{-5})(2-\sqrt{-5})
+\]
+\indent 而若$3|(2+\sqrt{-5})$，则$\exists \beta\in {\mathbb{Z}[\sqrt{-5}]}^*$，使得$3\cdot \beta=(2+\sqrt{-5})$。等式两端同时取模长得：
+\[
+{|3\beta|}^2={|2+\sqrt{-5}|}^2\iff 9{|\beta|}^2=9\iff {|\beta|}^2=1
+\]
+\indent 于是有$\beta\in \{1,-1\}$，因而$3=2+\sqrt{-5}$或$3=-2-\sqrt{-5}$。变形得$1=\sqrt{-5}$或$5+\sqrt{-5}=0$，可知两种情况都矛盾，因此$3\nmid (2+\sqrt{-5})$\\
+\indent 同理有$3\nmid (2-\sqrt{-5})$，因此可知$3$不是素元素\\
+\end{proof}
+
+\kfj{定义：}对于整区$R$，我们作如下定义：\\
+\indent (素性条件)：若$R$中不可约元素都是素元素，则称$R$满足素性条件。\\
+\indent (最大公因子条件)：对于$R^*$中元素$a$和$b$，若$\exists d\in R^*$，使得$d|a$且$d|b$，则称$d$是$a$和$b$的公因子。进一步地，若对于$a$和$b$的任意一个公因子$d'$，都有$d'|d$，则称$d$是$a$和$b$的一个最大公因子。于是，若$R^*$中任意两个元素$a$和$b$，都存在他们的最大公因子，则称整区$R$满足最大公因子条件\\
+\indent \noteb{(注：与最大公因子相伴的元素也是最大公因子，因此不能确定最大公因子唯一)}\\
+\indent (因子链条件)：对于$R^*$中的一个无穷序列：
+\[
+a_1,\; a_2,\; \cdots ,\;a_n,\;a_{n+1},\cdots
+\]
+若$\forall n\geq 1$，都有$a_{n+1}|a_n$，则称这个序列是一个因子链。若整区$R$满足对于$R$中的任意一个因子链${\{a_n\}}_{n\in \mathbb{N}^*}$都有：
+\[
+\exists N\in \mathbb{N}^*,\; \forall n\geq N,\; a_n\sim a_N
+\]
+则称$R$满足因子链条件。\\
+\indent (有限析因条件)：若$R-U$中任意一个元素都可以写为有限个不可越元的乘积，那么则称$R$满足有限析因条件\\
+\kfj{定义：}(唯一析因环)：对于整区$R$，若$R$满足有限析因条件，并且任取一个元素$r\in R^*$，若$R$中有限个不可约元素$p_1,\; p_2,\cdots,p_s$，满足$p_1p_2\cdots p_s=r$，则称这是一个$r$的有限不可约乘积表示。若任取两个有限不可约乘积表示：
+\[
+r=p_1p_2\cdots p_s,\; r=q_1q_2\cdots q_t
+\]
+都满足$s=t$，且存在置换$\sigma\in S_t$，使得$\forall 1\leq i\leq t,\; p_i\sim q_{\sigma(i)}$。则称$R$是一个唯一析因环，简称UFD(Unique Factorization Domain)\\
+\kfj{引理：}对与$R$是整区，有：
+\[
+(\text{因子链条件})\implies (\text{有限析因条件})
+\]
+\begin{proof}
+(先证明$R^*-U$中任意元素都存在不可约的因子)\\
+\indent 我们观察因子链条件的陈述不难想到利用它的方法，即反证法然后推出矛盾的无穷序列。这种方法与微积分中很多极限的命题颇有一曲同构之妙，我们下面就来把这个想法具体实施一下。\\
+\indent1、任取$r\in R^*-U$，我们假设$r$的因子都是可约元。\\
+\indent2、于是由可约元的定义可知，我们可约找到$r$的真因子$r_1\in R^*-U$。我们可知$r_1$的因子也是$r$的因子，因此同理可以找到$r_1$的真因子$r_2$。\\
+\indent3、以此类推，我们可以找到一串序列$r,\; r_1,\; r_2,\; \cdots$，且由于$\forall n\in \mathbb{N}^*,\; r_{n+1}|r_n$，因此这是一条因子链，并且$\forall n$，$m>n$时都有$r_m$是$r_n$的真因子，这与因子链条件矛盾。\\
+\indent 于是我们可知，$r$存在不可约的因子。\\
+(再证明此时满足有限析因条件)\\
+\indent1、任取$a_0\in R^*-U$，由刚才论述知$a_0$有不可约因子，于是设$b_1$是$a_0$的一个不可约因子。依定义可知$\exists a_1\in R^*$，使得$a_0=b_1\cdot a_1$。\\
+\indent2、若此时$a_1$不可约则直接证毕，于是设$a_1$可约，从而存在$a_1$的不可约因子$b_2$，以及$a_2\in R^*$使得$a_1=b_2\cdot a_2$。此时有$a_0=b_1\cdot b_2\cdot a_2$。\\
+\indent 3、此过程可以一直重复。若在有限步之内无法停止，即每次得到的“$a_n$”都是可约的，那么我们得到了一个无穷序列：
+\[
+a0,\; a_1,\; a_2,\; \cdots
+\]
+且$\forall n\in \mathbb{N}^*,\; a_n|a_{n+1}$。于是这与因子链条件矛盾，因此事实上这样的操作可以在有限步之内停止，即必然存在$m\in \mathbb{N}^*$，使得上述操作所得$a_m$是不可约元素。于是有有限乘积表示：
+\[
+a_0=b_1b_2\cdots b_ma_m
+\]
+\indent 综上可知，此时整区$R$满足有限析因条件
+\end{proof}
+\indent 我们即将介绍本节最主要的一个定理，但是在证明这个定理之前，我们给出一个概念的定义：\\
+\kfj{定义：}设$R$是UFD，我们现在在UFD中定义元素的长度。任取$R^*$中元素$r$，则对于$r=p_1\cdots p_t$是$r$的一个有限不可约乘积表示，则依定义，该乘积表示中的不可约元素的个数是确定的。由此我们定义$r$的长度为$t$，记为$|r|=t$。对于$R$中单位，我们人为定义其长度为$0$；对于$R$中零元我们不定义其长度。\\
+\kfj{性质：}
+\[
+\left\{
+\begin{aligned}
+&1^*:\;\forall a,b\in R^*,\; |a\cdot b|=|a|+|b|\\
+&2^*:\;\forall a,b\in R^*,\; a|b\implies |b|\geq|a|\\
+&3^*:\;\forall a,b\in R^*,\; a\sim b\iff (|a|=|b|\text{且}\; a|b)
+\end{aligned}\right.
+\]
+\begin{proof}
+$1^*$：由定义不难验证，对于两个有限不可约乘积表示$a=p_1\cdots p_t,\; b=q_1\cdots q_s$，则$ab=p_1\cdots p_tq_1\cdots q_s$是一个$ab$的有限不可约乘积表示，于是有$|ab|=s+t=|a|+|b|$。\\
+\indent $2^*$：依定义，$a|b\implies \exists q\in R^*$使得$aq=b$，于是由性质1可知：
+\[
+|q|\geq 0\implies|b|=|a|+|q|\geq|a|
+\]
+\indent $3^*$：$a\sim b$推出$|a|=|b|$和$a|b$是显然的，下面证明另一侧的推出关系。已知$a|b$，因此$\exists u\in R^*$，使得$b=ua$。若$u\in R^*-U$，则可知$|u|=1$，因此有：
+\[
+|b|=|a|+|u|>|a|
+\]
+与$|a|=|b|$矛盾。因此$u\in U$，即$a\sim b$。
+\end{proof}
+\kfj{定理：}若$R$是整区，那么下列陈述等价：
+\[
+\left\{
+\begin{aligned}
+&(1)R\text{是唯一析因环}\\
+&(2)R\text{满足(因子链条件)}+\text{(最大公因子条件)}\\
+&(3)R\text{满足(因子链条件)}+\text{(素性条件)}
+\end{aligned}\right.
+\]
+我们分三个部分证明这个定理，即$(1)\implies(2)$、$(2)\implies(3)$、$(3)\implies(1)$三个部分。\\
+\kfj{(1)$\implies$(2)}
+\begin{proof}
+\indent 对于唯一析因环$R$，我们下面先证明其符合因子链条件。设
+\[
+a_1,\; a_2,\; a_3,\cdots
+\]
+是$R$中的一条因子链，则可知：
+\[
+\forall n\in \mathbb{N}^* ,\; |a_n|\geq |a_{n+1}|
+\]
+若不存在$m\in \mathbb{N}^*$，使得$\forall n\geq m,\; |a_n|=|a_m|$，则有：
+\[
+\forall n\in \mathbb{N}^*,\; \exists k_n\in\mathbb{N}^*,\; |a_{k_n}|<|a_n|
+\]
+于是对于UFD中因子链的首项$a_1$应用有限析因条件可知存在正整数$M$，使得$|a_1|<M$。于是可知：
+\[
+\exists k_1,\cdots,k_M\in \mathbb{N}^*,\; M>|a_1|>|a_{k_1}|>\cdots>|a_{k_M}|
+\]
+此时有$|a_{k_M}|\leq|a_1|-M<M-M=0$，这与UFD中元素长度的定义相矛盾，因此有：
+\[
+\exists m\in \mathbb{N}^*,\; \forall n\geq m,\; |a_n|=|a_m|
+\]
+于是由UFD中长度的性质可知$R$满足因子链条件。\\
+\indent 下面证明$R$也满足最大公因子条件。$\forall a,b\in R^*$，若$a$和$b$中有一个是单位，则由于单位长度是0，故立即可知$a$和$b$的公因子必然是单位。\\
+若$a$和$b$均不是单位，则有唯一析因：
+\[
+a=a_1\cdots a_t,\; b=b_1\cdots b_s
+\]
+将$a_1,\cdots,a_t,b_1,\cdots,b_s$中所有互不相伴的元素取出并记为$p_1,p_2,\cdots,p_k$。即：
+\[
+\forall 1\leq i<j\leq k,\; p_i\nsim p_j
+\]
+\indent 且有任取$1\leq i\leq t$，存在唯一的$p_{k_i}$使得$a_i\sim p_{k_i}$；任取$1\leq j\leq t$，存在唯一的$p_{s_j}$使得$b_j\sim p_{s_j}$。于是可知，存在唯一一组系数$n_1,\cdots,n_k,m_1,\cdots,m_k$，使得：
+\[
+\left\{
+\begin{aligned}
+&a\sim p_1^{n_1}\cdots p_k^{n_k}\\
+&b\sim p_1^{m_1}\cdots p_k^{m_k}
+\end{aligned}\right.
+\]
+\indent 于是对于$\forall 1\leq i\leq k$，令$e_i=min\{m_i,n_i\}$，设$d=p_1^{e_1}\cdots p_k^{e_k}$。此时可知$d$必然是$a$和$b$的公因子。若$d'$也是$a$和$b$的公因子，则$\exists u,b\in R^*$，使得$a=ud',\; b=vd'$。对$\forall 1\leq i\leq k$，若$p_i^{e_i+1}|d'$，则由唯一析因性知，$a$和$b$必有$p_i^{e_i+1}$这个因子。但是$e_i$作为$m_i$和$n_i$中的最小者，必有一个比$e_i+1$小，因此可知$a=ud'$和$b=vd'$中必有一个是矛盾式。因此$\forall 1\leq i\leq k,\; p_i^{e_i+1}\nmid d'$。\\
+\indent 再由唯一析因性可知$d'$必然由$\{p_i\}$的乘积而得，故
+\[
+d'=p_1^{x_1}\cdots p_k^{x_k}
+\]
+\indent 但是我们由于$p_i^{e_i+1}\nmid d'$，故$\forall 1\leq i\leq k,\; x_i\leq e_i$，于是有$d'|d$，即$d$是$a$和$b$的最大公因子。\\
+综上可知，UFD满足即满足因子链条件，也满足最大公因子条件。
+\end{proof}
+在证明下一个部分之前，我们先证明一个引理：\\
+\kfj{引理：}在满足最大公因子条件的整区$R$中，设元素$a$和$b$的最大公因子为$d$，那么任取元素$c\in R^*$，都有$cd$是$ca$和$cb$的一个最大公因子。
+\begin{proof}
+此时我们不妨设$x$是$ca$和$cb$的一个最大公因子，那么有：
+\[
+\left\{
+\begin{aligned}
+&d|a\\
+&d|b
+\end{aligned}\right.
+\implies
+\left\{
+\begin{aligned}
+&cd|ca\\
+&cd|cb
+\end{aligned}\right.
+\]
+得到$cd$是$ca$和$cb$的一个公因子，依最大公因子定义可知$cd|x$，不妨设$x=ucd,\; u\in R^*$。而
+\[
+\left\{
+\begin{aligned}
+&c|ca\\
+&c|cb
+\end{aligned}\right.
+\implies c|x
+\]
+\indent 于是此时设$x=cy$。带入$x=ucd$得：$cy=ucd$。由于整区中有消去律，因此可知$y=ud$，带入得$x=cud=ucd$，推出$x|cd$。再结合$cd|x$知$x\sim cd$，因此$cd$也是$ca$和$cb$的一个最大公因子。
+\end{proof}
+\kfj{(2)$\implies$(3)}
+\begin{proof}
+\indent 设整区$R$满足因子链条件以及最大公因子条件，任取$R$中不可约元素$r$，下面证明$r$是素元素。\\
+\indent 设$a$和$b$满足$r|ab$，其中$a,b\in R^*$。我们记$d$是$b$和$r$的一个最大公因子。由于$r$不可约，因此要么$r\sim d$，要么$d\sim 1$。\\
+\indent 对于$(r\sim d)$的情况，由于$d|b$，因此有$r|b$\\
+\indent 对于$(d\sim 1)$的情况，由引理：
+\[
+a=a\cdot 1\text{是}ar\text{和}ab\text{的一个最大公因子}
+\]
+且有
+\[
+\left\{
+\begin{aligned}
+&r|ab\\
+&r|ar
+\end{aligned}\right.
+\implies
+r\text{是}ar\text{和}ab\text{的一个公因子}
+\]
+于是依最大公因子定义可知：$r|a$\\
+\indent 综上可知，若$r|ab$，则要么$r|b$，要么$r|a$，因此$r$是素元素。
+\end{proof}
+
+\kfj{(3)$\implies$(1)}
+\begin{proof}
+我们在本定理之前已经证明了(因子链条件)可以推出(有限析因条件)，因此只需证明此时$R$亦满足(唯一析因条件)即可\\
+\indent 任取整区$R$中元素$a$，设$a=p_1\cdots p_r$和$a=q_1\cdots q_s$是$a$的两个有限不可约乘积表示，不妨设$s\geq r$。为了方便书写，我们引入除法记号：
+\[
+\text{记：}q_1\cdots q_s/q_k=\prod_{i\neq k}q_i
+\]
+\indent 由于$p_1|p_1\cdots p_r\implies p_1|q_1\cdots q_s$，且由素性条件知$p_1$是不可约元因而是素元素，所以$\exists k_1\in\{1,\cdots,s\}$，使得$p_1|q_{k_1}$。而$q_{k_1}$是不可约元且$p_1$不是单位，因此有相伴关系：
+\[
+p_1\sim q_{k_1}
+\]
+\indent 由于$p_2|p_2\cdots p_r$，可知$p_2|(q_1\cdots q_s/q_{k_1})$，同理$\exists k_2\in (\{1,\cdots,s\}-\{k_1\})$，使得$p_2\sim q_{k_2}$。\\
+\indent 我们可重复此操作：由于$p_i|p_i\cdots p_r$，可知$p_i|(q_1\cdots q_s/q_{k_1}\cdots q_{k_{i-1}})$。同理$\exists k_i\in (\{1,\cdots,s\}-\{k_1,\cdots,k_{i-1}\})$，使得$p_i\sim q_{k_i}$。\\
+\indent 此时我们定义映射：
+\[
+\sigma \colon \{1,\cdots,r\}\to \{1,\cdots,s\},\; i\mapsto k_i
+\]
+\indent 依定义可知$\forall i\in \{2,\cdots,r\},\; \forall j<i,\; \sigma(i)\neq\sigma(j)$，于是立即可知$\sigma$是单射。同时有：
+\[
+\{1,\cdots,s\}-\{k_1,\cdots,k_{r}\}=\{1,\cdots,s\}-\sigma(\{1,\cdots,r\})
+\]
+这个补集中有$s-r$个数。现在我们假设$s>r$，故此时我们不妨设他们为$n_1,\cdots,n_{s-r}$。于是我们有
+\[
+a=p_1\cdots p_r=\left(\prod_{i=1}^r q_{\sigma(i)}\right)\cdot\left(\prod_{j=1}^{s-r} q_{n_j}\right)
+\]
+由整区中的消去律知：
+\[
+1\sim \prod_{j=1}^{s-r} q_{n_j}
+\]
+于是$\forall 1\leq j\leq s-r$都有$q_{n_j}$是可逆元，即单位。这与$q_{n_j}$是不可约元矛盾，因此必有$s=r$。\\
+\indent 此时我们可知$\sigma$是一个双射。而当$s=r$时，特别地有$\{1,\cdots,s\}=\{1,\cdots,r\}$是同一个集合，因此$\sigma$是$\{1,\cdots,r\}$上的置换，即$\sigma\in S_r$，且有：
+\[
+\forall 1\leq i\leq r,\; p_i\sim q_{\sigma(i)}
+\]
+因此可知$R$是唯一析因环。
+\end{proof}
