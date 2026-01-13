@@ -224,6 +224,31 @@ R\arrow[ru,"i"]\arrow[r,"\mathrm{Id}_R"]\arrow[rd,"i"'] & R\arrow[d,"i"]\\
 \indent 2、由性质1立即可知$"\sim"$是一个等价关系，下面我们来看对于$a\sim b$且$c\sim d$，我们设$u,v\in U$，使得$ua=b,\; vc=d$。于是由整区的交换性，$bd=(ua)(vc)=u(av)c=u(va)c=(uv)(ac)\implies bd\sim ac$\\
 \indent 3、由性质1可知$u\sim 1\iff \exists v\in U$使得$uv=1$。而$u\in U\iff \exists v\in R^*$使得$uv=1$。事实上若$uv=1$，则$u$和$v$都可逆，因此必有$u,v\in U$，于是可知$\exists v\in R^*$使得$uv=1$$\iff \exists v\in U$使得$uv=1$。综上可知有$u\sim 1\iff u\in U$
 \end{proof}
+\kfj{性质：}设$R$是整区，$U$是$R$的单位群，那么：
+\[
+\left\{
+\begin{aligned}
+&(1):\;a\mid b\iff <b>\subset <a>\\
+&(2):\;a\sim b\iff <a>=<b>\\
+&(3):\;u\in U\iff <u>=R
+\end{aligned}\right.
+\]
+\begin{proof}
+(1):可知$a\mid b\iff \forall r\in R^*,\; a\mid rb$。（其中左推右显然，右推左令$r$是幺元即可）然而易知$0\in<b>\cap<a>$，因此$\forall r\in R^*,\; a\mid rb\iff <b>\subset<a>$，从而有：$a\mid b\iff <b>\subset<a>$\\
+\indent (2):可知$a\sim b\iff a\mid b\text{且} b\mid a$，因此由性质(1)可知：
+$\left\{
+\begin{aligned}
+&<b>\subset<a>\\
+&<a>\subset<b>
+\end{aligned}\right.$
+\\
+于是立即可知$a\sim b\iff <a>=<b>$。\\
+\indent (3):设环$R$的幺元是$1$，那么有：
+\[
+<1>=\{r\cdot 1|r\in R\}=R
+\]
+因此借助(2)的结论可知$<u>=R\iff <u>=<1>\iff u\sim 1\iff u\in U$
+\end{proof}
 \kfj{定义：}
 \[
 \begin{aligned}
@@ -502,3 +527,278 @@ a=p_1\cdots p_r=\left(\prod_{i=1}^r q_{\sigma(i)}\right)\cdot\left(\prod_{j=1}^{
 \]
 因此可知$R$是唯一析因环。
 \end{proof}
+
+\section{主理想整环PID和欧几里得整环ED}
+
+\indent 回忆之前定义过，可以由单个元素生成的理想我们称之为主理想。\\
+\kfj{定义：}设$R$是整区，若$R$中所有的理想都是主理想，即都可由单个理想生成，则称$R$为主理想整环(Principal Ideal Domain)，简记为PID。\\
+\noteb{(注：由于PID是整区，因此PID中的理想都形如：$<a>=\{ra|r\in R\}$，且$x\in <a>\iff a|x$)}\\
+\kfj{例：}$\mathbb{Z}$是PID。这是因为$\mathbb{Z}$的子群都形如$m\mathbb{Z}=<m>$从而必然是主理想。\\
+\kfj{例：}整系数多项式$\mathbb{Z}[x]$在多项式加法和多项式乘法下构成一个整区，但是$\mathbb{Z}[x]$不是PID。
+\begin{proof}
+显然$\mathbb{Z}[x]$是一个整区，下面说明它不是PID。\\
+\indent 考虑由$2$和$x^2+1$生成的理想$I=<2,x^2+1>$，假设$I$是$\mathbb{Z}[x]$的主理想，则存在多项式$g(x)\in \mathbb{Z}[x]$，使得$I=<g(x)>$。于是可知$2\in I\implies g(x)\mid 2$，易知$2$是$\mathbb{Z}[x]$中的不可约元素，从而可知$g(x)\in \{1,-1,2,-2\}$。然而回忆含幺交换环的生成理想，可知：
+\[
+<2,x^2+1>=\{2u(x)+(x^2+1)v(x)\mid u(x),v(x)\in \mathbb{Z}[x]\}
+\]
+\indent 因此$g(x)\neq 1$，同理$g(x)\neq -1$，故$g(x)\in \{2,-2\}$。 显然$x^2+1$也是$\mathbb{Z}[x]$中的不可约元，从而与$g(x)\in \{2,-2\}$矛盾。综上可知$I$不是主理想，因而$\mathbb{Z}[x]$不是PID。
+\end{proof}
+\kfj{定理：}PID必定是UFD，即主理想整环一定是唯一析因环。
+\begin{proof}
+回忆$UFD\iff $(因子链条件)$+$(最大公因子条件)，我们先证明PID满足因子链条件。\\
+\indent 设$R$是PID，$a_1,a_2,a_3,\cdots$是$R$中的一条因子链，则由整除关系知：
+\[
+<a_1>\subset<a_2>\subset<a_3>\subset\cdots
+\]
+记：
+\[
+I=\bigcup_{k\geq 1}<a_k>
+\]
+\indent 则$\forall x\in I,\exists k\geq 1,x\in <a_k>\implies \forall r\in R, rx\in <a_k>\subset I$，从而可知$I$是$R$的理想。由于$R$是PID，因此不妨设$I=<a>$\\
+\indent 由于$a\in I$，故存在$m\geq 1$，使得$a\in <a_m>$。因此可知$I=<a_m>$，于是：
+\[
+\forall n\geq m,\; <a_m>\subset<a_n>\subset I\implies <a_m>=<a_n>=I\iff a_n\sim a_m
+\]
+因此可知$R$满足因子链条件。下面说明$R$满足最大公因子条件。\\
+\indent 任取$a,b\in R^*$，作$a$和$b$的生成理想$<a,b>\zg R$。由于$R$是PID，故$\exists d\in R^*$，使得$<d>=<a,b>$。此时由$a\in <d>$，且$b\in <d>$可知：$d\mid a,d\mid b$，即$d$是$a$和$b$的公因子。若$d'$也是$a$和$b$的公因子，则必有$d'\mid a$且$d'\mid b$，从而由生成理想的极小性知：
+\[
+<d>=<a,b>\subset<d'>\implies d\mid d'
+\]
+因此可知$d$是$a$和$b$的最大公因子，从而$R$满足最大公因子条件。综上可知，$R$是UFD。
+\end{proof}
+\kfj{推论：}(Bezout等式)在PID中，任意两个元素$a$和$b$，考虑$d$是$a$和$b$的最大公因子，则：
+\[
+\exists u,v\in R,\; \text{使得}ua+vb=d
+\]
+\begin{proof}
+已知$<d>=<a,b>=\{xa+yb|x,y\in R\}$，于是由$d\in <a,b>$立即得出结论。
+\end{proof}
+\noteb{(注：虽然我们在上述定理中只证明了$<a,b>$可由二者的最大公因子生成，但由于同一个理想的生成元是互相相伴的，且最大公因子之间也是互相相伴的，因此$<a,b>$的生成元与二者的所有最大公因子一一对应)}\\
+\indent 我们不难看出，整数环是整区这个对象的一个代表，一般的整区与整数环有诸多相似之处，上面我们就推广了某些整区上可以成立Bezout等式，这是初等数论中一个比较广为人知的结论。事实上，一般的整区与整数环最大的相似之处就是没有普遍成立的除法。但是初等数论给出整数环中除法的替代品：带余除法。事实上这一特殊的操作并不能在一般的整区上推广，我们把这个性质提炼出来，称这种”能做带余除法“的整区称为欧几里得整环，即欧式整环。\\
+\kfj{定义：}对于整区$R$，记$\mathbb{N}$是自然数集\noteb{($\{0,1,2,\cdots\}$)}，若存在映射
+\[
+\delta\colon R^*\to \mathbb{N}
+\]
+使得$\forall (a,b)\in R\times R^*$，满足：
+\[\left\{
+\begin{aligned}
+&(1)\text{要么}\exists q\in R,\; a=qb\\
+&(2)\text{要么}\exists q,r\in R,\;a=qb+r,\; r\neq 0,\; \delta(r)<\delta(b)\\
+\end{aligned}\right.\]
+则称$R$是一个欧几里得整环，简记为ED(Euclidean Domain)\\
+\kfj{例：}$\mathbb{Z}$是ED。此处令$\delta\colon \mathbb{Z}-\{0\}\to \mathbb{N},\; n\mapsto |n|$，则易知带余除法成立。事实上，如此定义的带余除法就算是在整数环上也不见得唯一。
+\[
+\left\{
+\begin{aligned}
+&5=2\times 2+1,\; \delta(1)<\delta(2)\\
+&5=3\times 2+(-1),\; \delta(-1)<\delta(2)
+\end{aligned}\right.
+\]
+下面给出一个比较重要的例子：\\
+\kfj{定理：}设$F$是域，那么$F-$系数多项式环$F[x]$是ED。且对于
+\[
+\delta\colon F[x]-\{0\}\to \mathbb{N},\; f(x)\mapsto deg(f(x))
+\]
+有带余除法唯一。
+\begin{proof}
+(存在性）：\\
+\indent 任取两个多项式$f(x),g(x)\in F[x]$，$g(x)$不是零。若$deg(f(x))<deg(g(x))$，则立即有带余除法：
+\[
+f(x)=0\cdot g(x)+f(x),\; deg(f(x),\; deg(f(x))<deg(g(x))
+\]
+\indent 若$deg(f(x))\geq deg(g(x))$，我们对多项式的次数使用数学归纳法：设$deg(f(x))=n$。当$n=0$时，可知$f(x)$和$g(x)$都是常多项式，从而由$F$是域知，$g(x)\mid f(x)$，因此也有带余除法。现在对任意$n>0$，归纳假设对所有次数小于$n$的多项式均成立带余除法，则此时设
+\[
+f(x)=\sum_{k=0}^{n}a_kx^k,\; g(x)=\sum_{s=0}^{m}b_sx^s,\;\forall 0\leq k\leq n,\;\forall 0\leq s\leq m,\; a_k,b_s\in F
+\]
+则由于$m\leq n$，故$x^{n-m}\in F[x]$，此时做：
+\[
+f(x)-a_n\inv{b_m}x^{n-m}g(x)=\sum_{k=0}^{n}a_kx^k-\sum_{s=0}^{m}a_n\inv{b_m}b_sx^{n-m+s}
+\]
+则$f(x)-a_n\inv{b_m}x^{n-m}g(x)$是一个低于$n$次的多项式，于是有带余除法：
+\[
+f(x)-a_n\inv{b_m}x^{n-m}g(x)=q'(x)g(x)+r(x)
+\]
+其中$r(x)=0$或$r(x)\neq 0$且$deg(r(x))<deg(g(x))$。于是有带余除法：
+\[
+f(x)=(q'(x)+a_n\inv{b_m}x^{n-m})g(x)+r(x)
+\]
+则仍有$r(x)=0$或$r(x)\neq 0$且$deg(r(x))<deg(g(x))$。因此可知带余除法在$F[x]$中总是存在的。\\
+(唯一性)：\\
+\indent 设$f(x)=q(x)g(x)+r(x)=q'(x)g(x)+r'(x)$，则有：$(q(x)-q'(x))g(x)=r'(x)-r(x)\implies deg((q(x)-q'(x))g(x))=deg(r'(x)-r(x))$。而若$deg(q(x)-q'(x))\geq 0$，则有：$deg((q(x)-q'(x))g(x))\geq deg(g(x))>deg(r'(x)-r(x))$与等式矛盾，因此可知必有$q(x)-q'(x)$是零，从而有$q(x)-q'(x)=r'(x)-r(x)=0$，因此可知带余除法是唯一的。
+\end{proof}
+\kfj{例：}$\mathbb{Z}[\sqrt{-1}]=\{a+b\sqrt{-1}\mid a,b\in \mathbb{Z}\}$是ED。其中，我们令
+\[
+\delta\colon \mathbb{Z}[\sqrt{-1}]-\{0\}\to \mathbb{N},\; a+b\sqrt{-1}\mapsto a^2+b^2
+\]
+下面我们证明此时带余除法成立。
+\begin{proof}
+任取$\alpha,\beta\in \mathbb{Z}[\sqrt{-1}],\beta\neq 0$，考虑集族:
+\[
+W(m,n)=\left\{x+y\sqrt{-1}\bigm|-\frac{1}{2}+m\leq x\leq\frac{1}{2}+m,\; -\frac{1}{2}+n\leq y\leq \frac{1}{2}+n\right\}, m,n\in \mathbb{Z}
+\]
+显然$\{W(m,n)\}_{m,n\in\mathbb{Z}}$是整个复平面$\mathbb{C}$的一个覆盖，因此
+\[
+\exists q\in \mathbb{Z}[\sqrt{-1}],\; \dfrac{\alpha}{\beta}\in W(Re(q),Im(q))
+\]
+相应地，有：
+\[
+|Re(\frac{\alpha}{\beta}-q)|\leq \frac{1}{2},\; |Im(\frac{\alpha}{\beta}-q)|\leq\frac{1}{2}
+\]
+于是若令$r=\alpha-\beta q$，则有：
+\[
+\delta(r)={||\alpha-\beta q||}^2={||\beta||}^2{||\frac{\alpha}{\beta}-q||}^2\leq{||\beta||}^2\cdot(\frac{1}{4}+\frac{1}{4})<\delta(\beta)
+\]
+因此可知当$r=0$时，有整除：$\alpha=\beta q$，否则有带余除法：
+\[
+\alpha=\beta q+r,\; r\neq 0,\; \delta(r)<\delta(\beta)
+\]
+故此时$\mathbb{Z}[\sqrt{-1}]$上带余除法成立。
+\end{proof}
+\kfj{定理：}ED一定是PID
+\begin{proof}
+设$R$是ED，$I\zg R$是一个理想，下面证明$I$是主理想。\\
+若$I$是零理想，则显然$I$是主理想，故不妨设$I$不是零理想。那么考虑非负整数集
+\[
+S=\{\delta(x)|x\in I-\{0\}\}\subset \mathbb{N}
+\]
+\indent 那么可知$S$有最小值，于是不妨设$b\in I=\{0\}$，满足$\delta(b)=min(S)$。显然有$<b>\subset I$，下面证明反方向的包含。任取$a\in I$，由于$R$是ED，故做带余除法：
+\[
+\left\{
+\begin{aligned}
+& \text{若}\exists q\in R,\; a=qb,\text{则}b|a\implies a\in <b>\\
+& \text{若}\exists q,r\in R,\; a=qb+r,\; r\neq 0,\delta(r)<\delta(b),\text{则与}\delta(b)\text{最小矛盾}
+\end{aligned}\right.
+\]
+因此可知必然有：$I=<b>\implies I$是主理想。综上可知，ED一定是PID。
+\end{proof}
+\indent 我们之前知道，在PID中任意两个元素是存在最大公因子的，但是我们没有一种”算法“找到这个最大公因子。那么下面我们就引入数论中很有名的算法——辗转相除法。\\
+\kfj{定理：}ED上可使用辗转相除法求最大公因子。
+\begin{proof}
+\indent 我们先来说明可以通过这个算法来找到公因子。$\forall a,b\in R^*$，不妨设$\delta(a)\geq \delta(b)$，若$b\mid a$，则可知$b$是$a$和$b$的公因子。否则由带余除法：
+\[
+\exists q_1,r_1\in R,\text{使得}a=q_1b+r_1,\; r_1\neq 0,\; \delta(r_1)<\delta(b)
+\]
+同理若$r_1\mid b$，那么可知$r_1$是$a$和$b$的公因子，否则由带余除法：
+\[
+\exists q_2,r_2\in R,\text{使得}b=q_2r_1+r_2,\; r_2\neq 0,\; \delta(r_2)<\delta(r_1)
+\]
+这个操作可以一直重复下去，得到：（假设一直不可整除）
+\[
+\left\{
+\begin{aligned}
+&a=q_1b+r_1,\; r_1\neq 0 ,\; \delta(r_1)<\delta(b)\\
+&b=q_2r_1+r_2,\; r_2\neq 0,\; \delta(r_2)<\delta(r_1)\\
+&r_1=q_3r_2+r_3,\; r_3\neq 0,\; \delta(r_3)<\delta(r_2)\\
+&\vdots\\
+&r_k=q_{k+2}r_{k+1}+r_{k+2},\; r_{k+2}\neq 0,\; \delta(r_{k+2})<\delta(r_{k+1})
+\end{aligned}\right.
+\]
+若此操作无法在有限步内停止，则得到无穷序列：
+\[
+\delta(b)>\delta(r_1)>\delta(r_2)>\delta(r_3)>\cdots
+\]
+这与$Im\delta\subset\mathbb{N}$必有下界矛盾，因此存在正整数$n$，使得$r_{n-1}=q_{n+1}r_n$\\
+\indent 可知$r_n|r_{n-1}$，因此$r_{n-2}=q_nr_{n-1}+r_n\implies r_n|r_{n-2}$，以此类推，由$r_k=q_{k+2}r_{k+1}+r_{k+2}$知：$r_n\mid r_1$。同理由$b=q_2r_1+r_2,a=q_1b+r_1$知$r_n\mid a$，且$r_n\mid b$。因此我们如此求出$r_n$是$a$和$b$的公因子，下面证明$r_n$也是它们的最大公因子。\\
+\indent 若$d\mid a,\; d\mid b$，则由$r_1=a-q_1b$知$d\mid r_1$。同理再由$r_2=b-q_2r_1,\; r_{k+2}=r_k-q_{k+2}r_{k+1}$知，$d\mid r_n$，因此$r_n$是$a$和$b$的最大公因子。
+\end{proof}
+
+\section{素理想与极大理想：特殊的理想给出特殊的商环}
+\kfj{定义：}$R$是环，$\mathfrak{m}\subset R$是真理想。若包含$\mathfrak{m}$的理想仅有$\mathfrak{m}$和$R$，则称$\mathfrak{m}$是一个极大理想（Maximal Ideal）。\\
+\indent \kfj{引理：}对于含幺环$R$，有：$R$是除环$\iff\{0\}$是$R$中的极大理想。
+\begin{proof}
+$(\implies)$若$R$是除环，则设理想$M$是非零理想，那么$\exists m\in M,\; m\neq 0$，于是可知$\forall r\in R^*,\; r=r\inv{m}\cdot m\in <m>$，因此可知$M=R$。从而有$\{0\}$是极大理想。\\
+$(\impliedby)$若$\{0\}$是极大理想，那么$\forall r\in R^*$，可知$\{0\}\subsetneq <r>$。由$\{0\}$是极大理想知$<r>=R$，特别地$r$是可逆元。于是由$r$的任意性可知$R$是除环。
+\end{proof}
+\kfj{定理：}$R$是含幺环，对于理想$\mathfrak{m}\subsetneq R$，有：
+\[
+\mathfrak{m}\text{是}R\text{的极大理想}\iff R/\mathfrak{m}\text{是除环}
+\]
+\begin{proof}
+由引理已知$R/\mathfrak{m}$是除环$\iff\{\ovl{0}\}$是$R/\mathfrak{m}$的极大理想$\iff$包含$\{\ovl{0}\}$的理想只有$\{\ovl{0}\}$和$R/\mathfrak{m}$。对于自然同态$\pi\colon R\to R/\mathfrak{m}$，考虑满同态对应定理，可知包含$\mathfrak{m}$的理想只有$\mathfrak{m}$和$R$。因此可知$R/\mathfrak{m}$是除环$\iff\mathfrak{m}$是$R$的极大理想。
+\end{proof}
+从这个定理我们可以总结出一个证明理想的极大性的一个套路，也就是把这个理想实现为打到除环的满同态的核。\\
+\kfj{例：}$<n>$是$\mathbb{Z}$的极大理想$\iff n$是素数。
+\begin{proof}
+可知$\mathbb{Z}/<m>\cong \mathbb{Z}_n$，故由定理可知$<m>$是$\mathbb{Z}$的极大理想$\iff\mathbb{Z}_n$是域。而$\mathbb{Z}_n$是域等价于$n$是素数。因此$<m>$是$\mathbb{Z}$的极大理想等价于$m$是素数。
+\end{proof}
+\indent \kfj{例：}$a\in \mathbb{C}$，则在$\mathbb{C}[x]$中\[<x-a>=Ker(\phi\colon \mathbb{C}[x]\to \mathbb{C},\; f(x)\mapsto f(a) )\]
+从而是极大理想。\\
+\indent \kfj{例：}$n\in \mathbb{Z}$，$p$是素数，则在$\mathbb{Z}[x]$中
+\[
+<p,(x-n)>=Ker(\phi\colon \mathbb{Z}[x]\to \mathbb{Z}_p,\; f(x)\mapsto f(\ovl{n}) )
+\]
+从而是极大理想。
+
+\kfj{定义：}$R$是一个环，若真理想$\mathfrak{p}\subsetneq R$满足：
+\[
+ab\in \mathfrak{p}\implies a\in \mathfrak{p}\text{或}b\in \mathfrak{p}
+\]
+则称$\mathfrak{p}$是一个素理想。\\
+\indent 不难联想到，素理想的定义跟素元素的定义极其相似，我们将会看到这二者之间的联系。\\
+\noteb{(注：我们考虑上述定义的逆否命题，$\mathfrak{p}$是素理想$\iff a\notin \mathfrak{p}$且$b\notin\mathfrak{p}\implies ab\notin\mathfrak{p}$，即集合$R-\mathfrak{p}$是乘法封闭的。当然这个集合只能确定的是乘法封闭，不会继承$R$更多的结构。)}\\
+\kfj{定理：}环$R$中真理想$\mathfrak{p}$是素理想$\iff R/\mathfrak{p}$是整的。
+\begin{proof}
+对于自然同态$\pi\colon R\to R/\mathfrak{p}$，可知$x\notin \mathfrak{p}\iff \pi(x)\neq \ovl{0}$于是有：
+\[
+ab\notin \mathfrak{p}\iff \pi(ab)\neq \ovl{0}\iff \pi(a)\pi(b)\neq \ovl{0}
+\]
+于是可知$\mathfrak{p}$是素理想等价于任意$a,b\notin \mathfrak{p}$，都满足$ab\notin \mathfrak{p}$，即$\pi(a)\pi(b)\neq \ovl{0}$。再由$\pi$是满同态就可以得到$\mathfrak{p}$是素理想等价于$R/\mathfrak{p}$是整的。
+\end{proof}
+\kfj{推论：}含幺环中，极大理想一定是素理想。
+\begin{proof}
+我们考虑$\mathfrak{m}$是环$R$的极大理想，则可知$R/\mathfrak{m}$是域，特别地是整的，因此由定理知$\mathfrak{m}$是素理想。
+\end{proof}
+\noteb{(注：如果去掉“含幺”这个条件，则命题不成立。)}\\
+\kfj{例：}考虑环$2\mathbb{Z}$的理想$4\mathbb{Z}$，那么可知$2\mathbb{Z}$和$4\mathbb{Z}$之间没有任何其他理想，从而$4\mathbb{Z}$是$2\mathbb{Z}$的极大理想，但是由于
+\[
+2\notin 4\mathbb{Z},\; 2\cdot 2=4\in 4\mathbb{Z}
+\]
+因此$4\mathbb{Z}$不是$2\mathbb{Z}$中的素理想。\\
+\kfj{例：}$<n>$是$\mathbb{Z}$的素理想$\iff n$是素数。
+\begin{proof}
+可知$\mathbb{Z}/<m>\cong \mathbb{Z}_n$，故由定理可知$<m>$是$\mathbb{Z}$的极大理想$\iff\mathbb{Z}_n$是整的。$n$是素数时显然有$\mathbb{Z}_n$是整的，但$n$不是素数时其真因子就是$\mathbb{Z}_n$中的零因子，从而不是整的。因此$<m>$是$\mathbb{Z}$的极大理想等价于$m$是素数。
+\end{proof}
+这个例子说理想的“素性”与元素的“素性”有强联系（事实上这种相似性在定义上就已经体现出来了），那么我们是否可以把这个命题推广到一般的环上呢？下面的定理给出了回答。\\
+\kfj{定理：}对于整区$R$，有：$a$是素元素$\iff<a>$是素理想
+\begin{proof}
+\[
+<a>\text{是素理想}\iff \left\{
+\begin{aligned}
+&<a>\neq R\\
+&x,y\notin<a>\implies xy\notin<a>
+\end{aligned}\right.
+\iff\left\{
+\begin{aligned}
+&a\in R-U\\
+&a\nmid x,\; a\nmid y\implies a\nmid xy
+\end{aligned}\right.
+\iff a\text{是素元素}
+\]
+\end{proof}
+\kfj{推论：}由于UFD满足(素性条件)，因此由不可约元等价于素元素知：
+\[
+<a>\text{是素理想}\iff a\text{是不可约元}
+\]
+\kfj{定理：}若$R$是PID，$I$是$R$的某个理想，则$I$是极大理想$\iff I$是素理想。
+\begin{proof}
+由于$R$是PID，那么$I$是主理想，于是不妨设$I=<x>$。于是考虑另一个理想$A$，同理记$A=<a>$，那么有：\[
+I\subset A\subset R\iff<x>\subset <a>\iff a\mid x
+\]
+因此可知$I$是$R$的极大理想等价于当$a\mid x$时，必有$a\in U$或$a\sim x$。故等价于$x$不可约。由于PID一定是UFD，因此可知等价于$x$是素元。于是可知$I$是极大理想等价于$I$是素理想。
+\end{proof}
+下面我们给出一种常见的，构造域的方式。\\
+\kfj{例：}对于域系数多项式环$F[x]$，考虑其中的不可约多项式$f(x)$。可知$F[x]$是ED从而是PID。因此由上述定理可知$<f(x)>$是极大理想，因此$F[x]/<f(x)>$是域。\\
+\kfj{例：}构造125阶域。（这个例子需要一些许线性代数基础，学过线性代数的读者可以看一下）。\\
+\indent 考虑$\mathbb{Z}_5$是域，那么$\mathbb{Z}_5[x]$是PID。考虑多项式：
+\[
+f(x)=x^3+x^2+1\in \mathbb{Z}_5[x]
+\]
+可知$degf(x)=3$，且$f(0)=1,f(1)=3,f(2)=3,f(3)=2,f(4)=1$，于是$f$是不可约三次多项式。故有
+\[
+K=\mathbb{Z}_5[x]/<x^3+x^2+1>\text{是域}
+\]
+由带余除法知，商环K中的等价类一定可以由2次多项式代表。于是有
+\[
+K=\{a_0+a_1x+a_2x^2|a_0,a_1,a_2\in \mathbb{Z}_5\}
+\]
+\indent 显然有$\{1,x,x^2\}$在K中线性无关，因此可知$K$是$\mathbb{Z}_5$上的三维线性空间。我们写出$K$在$\{1,x,x^2\}$下的基的坐标表示：$K=\{(a_0,a_1,a_2)|a_0,a_1,a_2\in \mathbb{Z}_5\}$。故$K$的元素个数为：$5^3=125$。

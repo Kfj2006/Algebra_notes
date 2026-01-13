@@ -23,3 +23,4 @@
 空集：\varnothing
 群作用于：\action
 同余：\equiv
+小写理想：\mathfrak
